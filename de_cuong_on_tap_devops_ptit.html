@@ -1,0 +1,3938 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đề Cương Ôn Tập DevOps Fundamental - Linux VPS, Git Flow & Nginx Deploy | PTIT</title>
+  <meta name="description" content="Đề cương ôn tập chi tiết, dễ hiểu môn DevOps Fundamental: Lệnh thao tác tệp tin Linux VPS, quy trình phân nhánh Git Flow, cấu hình và deploy website HTML với Nginx.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <style>
+/* ===================================================================
+   ĐỀ CƯƠNG ÔN TẬP DEVOPS FUNDAMENTAL - PTIT
+   Chủ đề: Linux VPS File Commands | Git Flow | Nginx Deployment
+   Design System & Styling
+   =================================================================== */
+
+:root {
+  /* Color Palette - Dark Mode (Default) */
+  --bg-primary: #0b0f19;
+  --bg-secondary: #111827;
+  --bg-card: #1a2234;
+  --bg-card-hover: #222d42;
+  --bg-input: #151d2d;
+  --bg-code: #0d121f;
+
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-focus: #3b82f6;
+
+  --text-primary: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --text-accent: #60a5fa;
+
+  /* Brand Accents */
+  --accent-blue: #3b82f6;
+  --accent-cyan: #06b6d4;
+  --accent-green: #10b981;
+  --accent-yellow: #f59e0b;
+  --accent-red: #ef4444;
+  --accent-purple: #8b5cf6;
+  --accent-pink: #ec4899;
+
+  /* Gradients */
+  --gradient-linux: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+  --gradient-git: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
+  --gradient-nginx: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+  --gradient-hero: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+  --gradient-badge: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+  --shadow-glow-blue: 0 0 25px rgba(59, 130, 246, 0.25);
+  --shadow-glow-green: 0 0 25px rgba(16, 185, 129, 0.25);
+
+  /* Typography & Layout */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, 'Courier New', monospace;
+  --sidebar-width: 290px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Light Mode Overrides (Bright, Clean, High Contrast) */
+[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --bg-input: #ffffff;
+  --bg-code: #0f172a;
+
+  --border-color: #e2e8f0;
+  --border-focus: #2563eb;
+
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-accent: #2563eb;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
+  --shadow-glow-blue: 0 0 20px rgba(37, 99, 235, 0.12);
+  --shadow-glow-green: 0 0 20px rgba(16, 185, 129, 0.12);
+}
+
+/* Light Theme Component Overrides */
+[data-theme="light"] .top-navbar {
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .app-sidebar {
+  background: #ffffff;
+  border-right: 1px solid #e2e8f0;
+}
+
+[data-theme="light"] .sidebar-nav-link {
+  color: #334155;
+}
+
+[data-theme="light"] .sidebar-nav-link:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+[data-theme="light"] .sidebar-nav-link.active {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+[data-theme="light"] .sidebar-badge {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+[data-theme="light"] .sidebar-progress {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+[data-theme="light"] .progress-bar-bg {
+  background: #e2e8f0;
+}
+
+[data-theme="light"] .hero-banner {
+  background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.08), transparent 60%),
+              radial-gradient(circle at bottom left, rgba(139, 92, 246, 0.08), transparent 60%),
+              #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .hero-tag {
+  background: rgba(37, 99, 235, 0.08);
+  border-color: rgba(37, 99, 235, 0.2);
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .hero-desc {
+  color: #334155;
+}
+
+[data-theme="light"] .hero-stat-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+[data-theme="light"] .stat-number {
+  color: #0f172a;
+}
+
+[data-theme="light"] .filter-container {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+[data-theme="light"] .filter-btn {
+  color: #475569;
+}
+
+[data-theme="light"] .filter-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+[data-theme="light"] .content-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .content-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .card-title {
+  color: #0f172a;
+}
+
+[data-theme="light"] .callout-info {
+  background: #eff6ff;
+  border-left-color: #3b82f6;
+  color: #1e3a8a;
+}
+
+[data-theme="light"] .callout-tip {
+  background: #ecfdf5;
+  border-left-color: #10b981;
+  color: #064e3b;
+}
+
+[data-theme="light"] .callout-warning {
+  background: #fffbeb;
+  border-left-color: #f59e0b;
+  color: #78350f;
+}
+
+[data-theme="light"] .callout-danger {
+  background: #fef2f2;
+  border-left-color: #ef4444;
+  color: #7f1d1d;
+}
+
+[data-theme="light"] .data-table th {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+[data-theme="light"] .data-table td {
+  color: #334155;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+[data-theme="light"] .data-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+[data-theme="light"] .quiz-section {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+[data-theme="light"] .quiz-question-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+[data-theme="light"] .quiz-q-text {
+  color: #0f172a;
+}
+
+[data-theme="light"] .quiz-option-btn {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #334155;
+}
+
+[data-theme="light"] .quiz-option-btn:hover {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-color: #3b82f6;
+}
+
+[data-theme="light"] .quiz-explanation {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+[data-theme="light"] .calc-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+[data-theme="light"] .calc-column {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+[data-theme="light"] .calc-column-title {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .calc-checkbox-label {
+  color: #334155;
+}
+
+[data-theme="light"] .calc-checkbox-label:hover {
+  background: #f1f5f9;
+}
+
+[data-theme="light"] .check-badge {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+  color: #475569;
+}
+
+[data-theme="light"] .check-badge:hover {
+  background: #ecfdf5;
+  color: #065f46;
+  border-color: #10b981;
+}
+
+[data-theme="light"] .check-badge.checked {
+  background: #dcfce7;
+  color: #15803d;
+  border-color: #86efac;
+}
+
+/* Base Styles & Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  scroll-padding-top: 80px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.65;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-card-hover);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-blue);
+}
+
+/* Reading Progress Bar */
+#reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--gradient-hero);
+  z-index: 1000;
+  transition: width 0.1s ease-out;
+}
+
+/* Header & Navbar */
+.top-navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 68px;
+  background: rgba(11, 15, 25, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  transition: var(--transition);
+}
+
+[data-theme="light"] .top-navbar {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.brand-badge {
+  background: var(--gradient-hero);
+  color: #fff;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.brand-title {
+  background: var(--gradient-hero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nav-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-search input {
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.45rem 1rem 0.45rem 2.2rem;
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  width: 240px;
+  transition: var(--transition);
+  outline: none;
+}
+
+.nav-search input:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  width: 300px;
+}
+
+.nav-search svg {
+  position: absolute;
+  left: 0.8rem;
+  color: var(--text-muted);
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+.btn-icon {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-icon:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+
+.mobile-nav-toggle {
+  display: none;
+}
+
+/* Main Container Layout */
+.app-container {
+  display: flex;
+  max-width: 1560px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Sidebar Navigation */
+.app-sidebar {
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  height: calc(100vh - 68px);
+  position: sticky;
+  top: 68px;
+  overflow-y: auto;
+  padding: 1.5rem 1rem 2rem 1.5rem;
+  border-right: 1px solid var(--border-color);
+  background: var(--bg-primary);
+}
+
+.sidebar-section-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+  padding-left: 0.75rem;
+  font-weight: 700;
+}
+
+.sidebar-nav-list {
+  list-style: none;
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-nav-item {
+  margin-bottom: 0.25rem;
+}
+
+.sidebar-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.sidebar-nav-link:hover {
+  color: var(--text-primary);
+  background: var(--bg-card);
+  transform: translateX(3px);
+}
+
+.sidebar-nav-link.active {
+  color: #fff;
+  background: var(--accent-blue);
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.sidebar-nav-link .icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.sidebar-badge {
+  margin-left: auto;
+  font-size: 0.7rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
+}
+
+.sidebar-progress {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.sidebar-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-input);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--gradient-hero);
+  border-radius: var(--radius-full);
+  transition: width 0.4s ease;
+}
+
+/* Main Content Area */
+.app-content {
+  flex: 1;
+  min-width: 0;
+  padding: 2.5rem 3rem 5rem 3rem;
+}
+
+/* Hero Section */
+.hero-banner {
+  background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.15), transparent 60%),
+              radial-gradient(circle at bottom left, rgba(139, 92, 246, 0.15), transparent 60%),
+              var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.hero-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-hero);
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--gradient-badge);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: var(--text-accent);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.hero-title {
+  font-size: 2.35rem;
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 1rem;
+  letter-spacing: -0.5px;
+}
+
+.hero-desc {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 820px;
+  margin-bottom: 1.8rem;
+  line-height: 1.6;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.hero-stat-card {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+[data-theme="light"] .hero-stat-card {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.stat-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-icon.linux { background: rgba(245, 158, 11, 0.2); color: var(--accent-yellow); }
+.stat-icon.git { background: rgba(236, 72, 153, 0.2); color: var(--accent-pink); }
+.stat-icon.nginx { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
+
+.stat-number {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Quick Filter Pills */
+.filter-container {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+}
+
+.filter-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.filter-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-card-hover);
+}
+
+.filter-btn.active {
+  background: var(--accent-blue);
+  color: #fff;
+}
+
+/* Section Header Styles */
+.topic-section {
+  margin-bottom: 4rem;
+  scroll-margin-top: 90px;
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--border-color);
+  position: relative;
+}
+
+.section-header::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 90px;
+  height: 2px;
+  background: var(--accent-blue);
+}
+
+.topic-section.linux .section-header::after { background: var(--accent-yellow); }
+.topic-section.git .section-header::after { background: var(--accent-pink); }
+.topic-section.nginx .section-header::after { background: var(--accent-green); }
+
+.section-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.section-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.section-badge.linux { background: var(--gradient-linux); color: #fff; }
+.section-badge.git { background: var(--gradient-git); color: #fff; }
+.section-badge.nginx { background: var(--gradient-nginx); color: #fff; }
+
+.section-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+.section-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+/* Cards & Content Blocks */
+.content-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.8rem;
+  margin-bottom: 1.8rem;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+.content-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: var(--shadow-md);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.card-title .icon-mini {
+  color: var(--text-accent);
+}
+
+/* Info Callout Boxes */
+.callout {
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  margin: 1.25rem 0;
+  display: flex;
+  gap: 0.85rem;
+  font-size: 0.925rem;
+  line-height: 1.6;
+  border-left: 4px solid transparent;
+}
+
+.callout-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin-top: 2px;
+}
+
+.callout-info {
+  background: rgba(59, 130, 246, 0.08);
+  border-left-color: var(--accent-blue);
+  color: #bfdbfe;
+}
+[data-theme="light"] .callout-info { color: #1e3a8a; }
+
+.callout-tip {
+  background: rgba(16, 185, 129, 0.08);
+  border-left-color: var(--accent-green);
+  color: #a7f3d0;
+}
+[data-theme="light"] .callout-tip { color: #064e3b; }
+
+.callout-warning {
+  background: rgba(245, 158, 11, 0.08);
+  border-left-color: var(--accent-yellow);
+  color: #fde68a;
+}
+[data-theme="light"] .callout-warning { color: #78350f; }
+
+.callout-danger {
+  background: rgba(239, 68, 68, 0.08);
+  border-left-color: var(--accent-red);
+  color: #fecaca;
+}
+[data-theme="light"] .callout-danger { color: #7f1d1d; }
+
+/* Code Blocks with Terminal Top Bar */
+.code-box {
+  background: var(--bg-code);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  margin: 1.2rem 0;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.code-header {
+  background: rgba(0, 0, 0, 0.35);
+  padding: 0.5rem 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.code-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.code-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.code-dot.red { background: #ef4444; }
+.code-dot.yellow { background: #f59e0b; }
+.code-dot.green { background: #10b981; }
+
+.code-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.btn-copy {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: var(--transition);
+}
+
+.btn-copy:hover {
+  background: var(--accent-blue);
+  color: #fff;
+  border-color: var(--accent-blue);
+}
+
+.code-body {
+  padding: 1.25rem 1.4rem;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: #f1f5f9;
+}
+
+.code-body code {
+  font-family: inherit;
+  display: block;
+  white-space: pre-wrap;
+  word-break: normal;
+  tab-size: 2;
+}
+
+/* Syntax Highlighting Classes */
+.c-cmd { color: #60a5fa; font-weight: 700; }     /* Command */
+.c-flag { color: #fbbf24; font-weight: 600; }    /* Flags */
+.c-path { color: #34d399; }                      /* Paths */
+.c-str { color: #c084fc; }                       /* Strings */
+.c-cmt { color: #94a3b8; font-style: italic; }   /* Comments - Rõ ràng, dễ đọc */
+.c-num { color: #f87171; font-weight: 600; }     /* Numbers */
+.c-kw { color: #f472b6; font-weight: 700; }      /* Keywords */
+
+/* Tables */
+.table-responsive {
+  overflow-x: auto;
+  margin: 1.25rem 0;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.data-table th {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+  font-weight: 700;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.data-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+[data-theme="light"] .data-table tbody tr:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.badge-tag {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+.badge-tag.blue { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+.badge-tag.green { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+.badge-tag.yellow { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+.badge-tag.red { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+.badge-tag.purple { background: rgba(139, 92, 246, 0.15); color: #c084fc; }
+
+/* Interactive Permission Calculator */
+.calc-card {
+  background: linear-gradient(145deg, var(--bg-card), var(--bg-card-hover));
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 1.8rem;
+  margin: 1.5rem 0;
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.calc-column {
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+}
+
+.calc-column-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
+  text-align: center;
+  color: var(--text-accent);
+}
+
+.calc-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.45rem 0.5rem;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  transition: var(--transition);
+}
+
+.calc-checkbox-label:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.calc-checkbox-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent-blue);
+  cursor: pointer;
+}
+
+.calc-result-box {
+  background: var(--bg-code);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.calc-digits {
+  font-family: var(--font-mono);
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--accent-yellow);
+  letter-spacing: 4px;
+}
+
+.calc-symbolic {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  color: var(--accent-cyan);
+}
+
+.calc-command-output {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: #a7f3d0;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+}
+
+/* Interactive SVG Diagram Containers */
+.diagram-wrapper {
+  background: var(--bg-code);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin: 1.8rem 0;
+  text-align: center;
+}
+
+.diagram-caption {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+/* Step by Step Timeline */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+  margin: 1.8rem 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 8px;
+  width: 2px;
+  background: var(--border-color);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -2rem;
+  top: 4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  border: 3px solid var(--bg-primary);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
+}
+
+.timeline-item.success .timeline-dot {
+  background: var(--accent-green);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+}
+
+.timeline-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.timeline-desc {
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Interactive Quiz Section */
+.quiz-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2.2rem;
+  margin: 3.5rem 0;
+}
+
+.quiz-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 2.5rem auto;
+}
+
+.quiz-question-card {
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: var(--transition);
+}
+
+.quiz-q-num {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text-accent);
+  letter-spacing: 0.5px;
+  margin-bottom: 0.4rem;
+}
+
+.quiz-q-text {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.quiz-option-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  text-align: left;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.quiz-option-btn:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+  border-color: var(--accent-blue);
+}
+
+.quiz-option-btn.correct {
+  background: rgba(16, 185, 129, 0.15) !important;
+  border-color: var(--accent-green) !important;
+  color: #34d399 !important;
+  font-weight: 600;
+}
+
+.quiz-option-btn.wrong {
+  background: rgba(239, 68, 68, 0.15) !important;
+  border-color: var(--accent-red) !important;
+  color: #f87171 !important;
+}
+
+.quiz-explanation {
+  display: none;
+  margin-top: 0.85rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  background: rgba(0, 0, 0, 0.25);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.quiz-explanation.show {
+  display: block;
+}
+
+/* Toast Notification */
+.toast-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+
+.toast {
+  background: #1e293b;
+  color: #fff;
+  border: 1px solid var(--border-color);
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  animation: toastIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  pointer-events: auto;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes toastOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(15px); }
+}
+
+/* Floating Actions */
+.floating-actions {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 800;
+}
+
+.btn-floating {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+}
+
+.btn-floating:hover {
+  background: var(--accent-blue);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-glow-blue);
+}
+
+/* Print Optimization */
+@media print {
+  .top-navbar,
+  .app-sidebar,
+  .filter-container,
+  .floating-actions,
+  .btn-copy,
+  .quiz-section,
+  #reading-progress {
+    display: none !important;
+  }
+
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .app-content {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .content-card, .hero-banner {
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    background: #fff !important;
+    color: #000 !important;
+    page-break-inside: avoid;
+  }
+
+  .code-box {
+    background: #f1f5f9 !important;
+    color: #000 !important;
+    border: 1px solid #ccc !important;
+  }
+
+  .code-body {
+    color: #000 !important;
+  }
+}
+
+/* Terminal Playground Simulator */
+.terminal-simulator {
+  background: #090d16;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg), 0 0 20px rgba(59, 130, 246, 0.15);
+  margin: 2rem 0;
+}
+
+.terminal-sim-header {
+  background: #111827;
+  padding: 0.65rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.terminal-sim-body {
+  padding: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  min-height: 220px;
+  max-height: 380px;
+  overflow-y: auto;
+  color: #e2e8f0;
+  line-height: 1.6;
+}
+
+.terminal-line {
+  margin-bottom: 0.5rem;
+  word-break: break-all;
+}
+
+.terminal-prompt {
+  color: #10b981;
+  font-weight: 700;
+  margin-right: 0.5rem;
+}
+
+.terminal-input-wrap {
+  display: flex;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+.terminal-input-field {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #f3f4f6;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  caret-color: #60a5fa;
+}
+
+.terminal-chips {
+  padding: 0.75rem 1rem;
+  background: #0f172a;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.terminal-chip {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #93c5fd;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.terminal-chip:hover {
+  background: var(--accent-blue);
+  color: #fff;
+  border-color: var(--accent-blue);
+}
+
+/* Card Checkbox Badge */
+.card-header-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.check-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  user-select: none;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+
+.check-badge:hover {
+  background: rgba(16, 185, 129, 0.1);
+  color: #34d399;
+  border-color: var(--accent-green);
+}
+
+.check-badge input[type="checkbox"] {
+  accent-color: var(--accent-green);
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.check-badge.checked {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border-color: var(--accent-green);
+}
+
+
+@media (max-width: 1024px) {
+  .app-sidebar {
+    position: fixed;
+    top: 68px;
+    left: -100%;
+    width: 300px;
+    background: var(--bg-primary);
+    z-index: 850;
+    transition: left 0.3s ease;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .app-sidebar.open {
+    left: 0;
+  }
+
+  .mobile-nav-toggle {
+    display: inline-flex;
+  }
+
+  .app-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .calc-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .top-navbar {
+    padding: 0 1rem;
+  }
+
+  .nav-search input {
+    width: 140px;
+  }
+
+  .nav-search input:focus {
+    width: 180px;
+  }
+
+  .hero-title {
+    font-size: 1.75rem;
+  }
+
+  .hero-banner {
+    padding: 1.5rem;
+  }
+
+  .calc-result-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+</style>
+</head>
+<body>
+  <!-- Reading Progress Bar -->
+  <div id="reading-progress"></div>
+
+  <!-- Top Navigation Bar -->
+  <header class="top-navbar">
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <button class="btn-icon mobile-nav-toggle" aria-label="Mở menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <a href="#" class="nav-brand">
+        <span class="brand-badge">PTIT</span>
+        <span class="brand-title">DevOps Fundamental</span>
+      </a>
+    </div>
+
+    <div class="nav-controls">
+      <!-- Live Search -->
+      <div class="nav-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="global-search" placeholder="Tra cứu lệnh (chmod, hotfix, nginx...)" aria-label="Tìm kiếm nhanh">
+      </div>
+
+      <!-- Theme Toggle -->
+      <button class="btn-icon" id="theme-toggle" title="Đổi giao diện Sáng / Tối">
+        <svg class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+
+      <!-- Print Button -->
+      <button class="btn-icon" onclick="window.print()" title="In hoặc Xuất file PDF để ôn tập">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-section-title">Tiến độ ôn tập</div>
+      <div class="sidebar-progress">
+        <div class="sidebar-progress-header">
+          <span>Đã hoàn thành</span>
+          <strong id="progress-percent">0%</strong>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="sidebar-progress-fill"></div>
+        </div>
+        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; text-align: right;">
+          Mục: <span id="completed-count">0/12</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section-title" style="margin-top: 1.5rem;">Mục Lục Đề Cương</div>
+      <ul class="sidebar-nav-list">
+        <li class="sidebar-nav-item">
+          <a href="#phan-1-linux" class="sidebar-nav-link">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 17l6-6-6-6M12 19h8"/></svg>
+            <span>Phần 1: Linux VPS & Tệp Tin</span>
+            <span class="sidebar-badge">Linux</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#linux-cautruc" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>1.1 Cấu trúc cây thư mục</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#linux-dieuhuong" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>1.2 Định hướng & Xem tệp</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#linux-thaotac" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>1.3 Tạo, Chỉnh sửa, Đọc tệp</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#linux-saochep" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>1.4 Sao chép, Di chuyển, Xóa</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#linux-timkiem" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>1.5 Tìm kiếm & Lọc dữ liệu</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#linux-phanquyen" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>1.6 Phân quyền & Sở hữu (chmod)</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#linux-nen" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>1.7 Nén, Dung lượng & Symlink</span>
+          </a>
+        </li>
+
+        <li class="sidebar-nav-item" style="margin-top: 0.75rem;">
+          <a href="#phan-2-gitflow" class="sidebar-nav-link">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M18 9a9 9 0 0 1-9 9"></path></svg>
+            <span>Phần 2: Git Flow Toàn Tập</span>
+            <span class="sidebar-badge">Git</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#git-khainiem" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>2.1 Bản chất Git Flow là gì?</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#git-nhanhchinh" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>2.2 Nhánh cốt lõi (Main / Develop)</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#git-nhanhphu" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>2.3 Nhánh hỗ trợ (Feature, Release, Hotfix)</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#git-quytrinh" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>2.4 Quy trình lệnh chi tiết từng bước</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#git-bangtracuu" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>2.5 Bảng tra cứu & Lỗi hay gặp</span>
+          </a>
+        </li>
+
+        <li class="sidebar-nav-item" style="margin-top: 0.75rem;">
+          <a href="#phan-3-nginx" class="sidebar-nav-link">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 8 8 12 12 16 16 12 12 8"></polygon></svg>
+            <span>Phần 3: Nginx & Deploy HTML</span>
+            <span class="sidebar-badge">Nginx</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#nginx-khainiem" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>3.1 Nginx là gì & Kiến trúc</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#nginx-caidat" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>3.2 Cài đặt & Lệnh systemctl</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#nginx-cautruc" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>3.3 Cấu trúc thư mục Nginx</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#nginx-serverblock" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>3.4 Cấu hình Virtual Host tĩnh</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#nginx-deploy" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>3.5 9 Bước Deploy HTML từ A-Z</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#nginx-troubleshoot" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>3.6 Tối ưu & Khắc phục lỗi 403, 404</span>
+          </a>
+        </li>
+
+        <li class="sidebar-nav-item" style="margin-top: 0.75rem;">
+          <a href="#phan-4-congcu" class="sidebar-nav-link">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+            <span>Phần 4: Công Cụ & Trắc Nghiệm</span>
+            <span class="sidebar-badge">Test</span>
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="app-content">
+      <!-- Hero Banner -->
+      <section class="hero-banner">
+        <div class="hero-tag">
+          <span>🎓 HỌC VIỆN CÔNG NGHỆ BƯU CHÍNH VIỄN THÔNG (PTIT)</span>
+        </div>
+        <h1 class="hero-title">Đề Cương Ôn Tập DevOps Fundamental</h1>
+        <p class="hero-desc">
+          Tài liệu tổng hợp thực chiến chuẩn hóa, giải thích bản chất dễ hiểu từng câu lệnh, kèm ví dụ thực tế trên môi trường Linux VPS, mô hình phân nhánh Git Flow và quy trình triển khai website HTML chuyên nghiệp với Nginx Web Server.
+        </p>
+
+        <div class="hero-stats">
+          <div class="hero-stat-card">
+            <div class="stat-icon linux">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 17l6-6-6-6M12 19h8"/></svg>
+            </div>
+            <div>
+              <div class="stat-number">25+ Lệnh</div>
+              <div class="stat-label">Thao tác tệp Linux VPS</div>
+            </div>
+          </div>
+
+          <div class="hero-stat-card">
+            <div class="stat-icon git">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M18 9a9 9 0 0 1-9 9"></path></svg>
+            </div>
+            <div>
+              <div class="stat-number">5 Nhánh</div>
+              <div class="stat-label">Quy chuẩn Git Flow</div>
+            </div>
+          </div>
+
+          <div class="hero-stat-card">
+            <div class="stat-icon nginx">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            </div>
+            <div>
+              <div class="stat-number">9 Bước</div>
+              <div class="stat-label">Deploy Nginx Chuẩn A-Z</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Category Filter Tabs -->
+      <div class="filter-container">
+        <button class="filter-btn active" data-filter="all">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line></svg>
+          Tất cả nội dung
+        </button>
+        <button class="filter-btn" data-filter="linux">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 17l6-6-6-6M12 19h8"/></svg>
+          1. Linux VPS Tệp Tin
+        </button>
+        <button class="filter-btn" data-filter="git">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M18 9a9 9 0 0 1-9 9"></path></svg>
+          2. Git Flow Thực Chiến
+        </button>
+        <button class="filter-btn" data-filter="nginx">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 8 8 12 12 16 16 12 12 8"></polygon></svg>
+          3. Nginx & Deploy HTML
+        </button>
+        <button class="filter-btn" data-filter="tools">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+          4. Công cụ & Trắc nghiệm
+        </button>
+      </div>
+
+      <!-- ==============================================================
+           PHẦN 1: CÁC CÂU LỆNH THAO TÁC VỚI TỆP TIN TRONG LINUX VPS
+           ============================================================== -->
+      <section class="topic-section linux" id="phan-1-linux">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-badge linux">🐧</div>
+            <div>
+              <h2 class="section-title">Phần 1: Các Câu Lệnh Thao Tác Với Tệp Tin Trong Linux VPS</h2>
+              <p class="section-subtitle">Nền tảng quản trị hệ điều hành máy chủ Linux (Ubuntu, Debian, CentOS, RHEL)</p>
+            </div>
+          </div>
+          <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; cursor: pointer;">
+            <input type="checkbox" class="topic-check" data-topic="linux-p1"> Đã học xong phần 1
+          </label>
+        </div>
+
+        <!-- 1.1 Cấu trúc cây thư mục Linux -->
+        <article class="content-card" id="linux-cautruc">
+          <h3 class="card-title">
+            <span class="icon-mini">📁</span> 1.1 Bản Chất Cây Thư Mục Linux (Filesystem Hierarchy)
+          </h3>
+          <p>
+            Không giống Windows phân chia ổ đĩa thành <code>C:\</code>, <code>D:\</code>, trong Linux <strong>tất cả mọi thứ đều là tệp tin</strong> (Everything is a file) và bắt đầu từ một thư mục gốc duy nhất là thư mục root (<code>/</code>).
+          </p>
+
+          <!-- SVG Diagram: Linux Directory Tree -->
+          <div class="diagram-wrapper">
+            <svg viewBox="0 0 820 220" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+              <style>
+                .tree-box { fill: #1e293b; stroke: #3b82f6; stroke-width: 1.5; rx: 8; }
+                .tree-box-root { fill: #1d4ed8; stroke: #60a5fa; stroke-width: 2; rx: 8; }
+                .tree-box-web { fill: #065f46; stroke: #34d399; stroke-width: 2; rx: 8; }
+                .tree-text { fill: #f3f4f6; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; text-anchor: middle; }
+                .tree-sub { fill: #94a3b8; font-family: 'Inter', sans-serif; font-size: 10px; text-anchor: middle; }
+                .tree-line { stroke: #475569; stroke-width: 2; stroke-dasharray: 4,4; }
+              </style>
+              <!-- Lines from Root -->
+              <line x1="410" y1="45" x2="80" y2="130" class="tree-line" />
+              <line x1="410" y1="45" x2="245" y2="130" class="tree-line" />
+              <line x1="410" y1="45" x2="410" y2="130" class="tree-line" />
+              <line x1="410" y1="45" x2="575" y2="130" class="tree-line" />
+              <line x1="410" y1="45" x2="740" y2="130" class="tree-line" />
+
+              <!-- Root Node -->
+              <rect x="360" y="10" width="100" height="45" class="tree-box-root" />
+              <text x="410" y="32" class="tree-text">/ (Root)</text>
+              <text x="410" y="47" class="tree-sub">Gốc hệ thống</text>
+
+              <!-- Node /etc -->
+              <rect x="25" y="130" width="110" height="60" class="tree-box" />
+              <text x="80" y="155" class="tree-text">/etc</text>
+              <text x="80" y="172" class="tree-sub">Cấu hình hệ thống</text>
+              <text x="80" y="184" class="tree-sub">(nginx, ssh, ufw)</text>
+
+              <!-- Node /var -->
+              <rect x="190" y="130" width="110" height="60" class="tree-box-web" />
+              <text x="245" y="155" class="tree-text">/var</text>
+              <text x="245" y="172" class="tree-sub">Dữ liệu biến động</text>
+              <text x="245" y="184" class="tree-sub">/var/www (Web), logs</text>
+
+              <!-- Node /home & /root -->
+              <rect x="355" y="130" width="110" height="60" class="tree-box" />
+              <text x="410" y="155" class="tree-text">/root & /home</text>
+              <text x="410" y="172" class="tree-sub">Thư mục cá nhân</text>
+              <text x="410" y="184" class="tree-sub">User thường & Super</text>
+
+              <!-- Node /bin & /usr/bin -->
+              <rect x="520" y="130" width="110" height="60" class="tree-box" />
+              <text x="575" y="155" class="tree-text">/bin & /usr</text>
+              <text x="575" y="172" class="tree-sub">Chương trình lệnh</text>
+              <text x="575" y="184" class="tree-sub">ls, cp, rm, git...</text>
+
+              <!-- Node /tmp -->
+              <rect x="685" y="130" width="110" height="60" class="tree-box" />
+              <text x="740" y="155" class="tree-text">/tmp</text>
+              <text x="740" y="172" class="tree-sub">Tệp tạm thời</text>
+              <text x="740" y="184" class="tree-sub">Tự dọn khi reboot</text>
+            </svg>
+            <div class="diagram-caption">Sơ đồ: Cấu trúc thư mục cốt lõi trên máy chủ Linux VPS mà kỹ sư DevOps cần nắm vững</div>
+          </div>
+
+          <div class="callout callout-info">
+            <span class="callout-icon">💡</span>
+            <div>
+              <strong>Phân biệt đường dẫn Tuyệt đối vs Tương đối:</strong>
+              <ul style="margin-top: 0.35rem; padding-left: 1.2rem;">
+                <li><strong>Đường dẫn tuyệt đối (Absolute Path):</strong> Luôn bắt đầu bằng dấu gạch chéo <code>/</code>, ví dụ <code>/var/www/html/index.html</code>. Luôn chỉ đúng 1 nơi dù bạn đang đứng ở đâu.</li>
+                <li><strong>Đường dẫn tương đối (Relative Path):</strong> Bắt đầu từ vị trí hiện tại của bạn, dùng <code>./</code> (thư mục này) hoặc <code>../</code> (lùi ra thư mục cha). Ví dụ <code>../nginx/nginx.conf</code>.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 1.2 Điều hướng & Xem thông tin -->
+        <article class="content-card" id="linux-dieuhuong">
+          <h3 class="card-title">
+            <span class="icon-mini">🧭</span> 1.2 Lệnh Định Hướng & Xem Thông Tin (pwd, cd, ls)
+          </h3>
+          
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Lệnh</th>
+                  <th>Cú pháp mẫu</th>
+                  <th>Ý nghĩa & Các cờ (Flags) quan trọng</th>
+                  <th>Ứng dụng DevOps thực tế</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>pwd</code></td>
+                  <td><code>pwd</code></td>
+                  <td><em>Print Working Directory</em>: In đường dẫn thư mục hiện hành đang đứng.</td>
+                  <td>Xác định bạn đang đứng ở đâu trước khi chạy lệnh xóa hoặc deploy.</td>
+                </tr>
+                <tr>
+                  <td><code>cd</code></td>
+                  <td>
+                    <code>cd /var/www/html</code><br>
+                    <code>cd ..</code><br>
+                    <code>cd ~</code><br>
+                    <code>cd -</code>
+                  </td>
+                  <td>
+                    <em>Change Directory</em>: Chuyển thư mục công tác.<br>
+                    • <code>cd ..</code> : Lùi về thư mục cha 1 cấp.<br>
+                    • <code>cd ~</code> : Về thư mục Home cá nhân (<code>/root</code> hoặc <code>/home/user</code>).<br>
+                    • <code>cd -</code> : Quay lại thư mục vừa đứng trước đó (cực tiện!).
+                  </td>
+                  <td>Di chuyển nhanh chóng giữa thư mục cấu hình Nginx và thư mục mã nguồn.</td>
+                </tr>
+                <tr>
+                  <td><code>ls</code></td>
+                  <td>
+                    <code>ls -la</code><br>
+                    <code>ls -lh</code><br>
+                    <code>ls -ltr</code>
+                  </td>
+                  <td>
+                    <em>List</em>: Liệt kê danh sách tệp tin & thư mục.<br>
+                    • <span class="badge-tag yellow">-a</span>: Hiện tất cả, bao gồm cả <strong>tệp ẩn</strong> (bắt đầu bằng dấu chấm như <code>.env</code>, <code>.git</code>).<br>
+                    • <span class="badge-tag blue">-l</span>: Xem dạng danh sách dài (quyền, owner, kích thước, thời gian).<br>
+                    • <span class="badge-tag green">-h</span>: <em>Human-readable</em> (hiển thị KB, MB, GB thay vì byte).<br>
+                    • <span class="badge-tag purple">-t</span> & <span class="badge-tag red">-r</span>: Sắp xếp theo thời gian sửa đổi (mới nhất lên trên / đảo ngược).
+                  </td>
+                  <td>
+                    Kiểm tra file cấu hình môi trường ẩn <code>.env</code> hoặc kiểm tra file log mới nhất vừa sinh ra.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="code-box">
+            <div class="code-header">
+              <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>
+              <span class="code-title">Terminal: Ví dụ chạy ls -lah</span>
+              <button class="btn-copy">Sao chép</button>
+            </div>
+            <div class="code-body">
+<code><span class="c-cmd">ls</span> <span class="c-flag">-lah</span> <span class="c-path">/var/www/html</span>
+<span class="c-cmt"># Kết quả mẫu:</span>
+<span class="c-cmt"># drwxr-xr-x 2 root     root     4.0K Oct  6 08:30 .</span>
+<span class="c-cmt"># drwxr-xr-x 3 root     root     4.0K Oct  6 08:29 ..</span>
+<span class="c-cmt"># -rw-r--r-- 1 www-data www-data  612 Oct  6 08:30 index.html</span>
+<span class="c-cmt"># -rw------- 1 www-data www-data  145 Oct  6 08:35 .env</span></code>
+            </div>
+          </div>
+        </article>
+
+        <!-- 1.3 Tạo, Chỉnh sửa, Đọc tệp -->
+        <article class="content-card" id="linux-thaotac">
+          <h3 class="card-title">
+            <span class="icon-mini">✍️</span> 1.3 Tạo, Đọc & Chỉnh Sửa Tệp Tin (touch, mkdir, cat, less, tail, nano, vim)
+          </h3>
+
+          <p>Trên máy chủ VPS không có giao diện đồ họa chuột phải, mọi thao tác tạo và đọc file đều thông qua dòng lệnh:</p>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Lệnh</th>
+                  <th>Cú pháp mẫu</th>
+                  <th>Mô tả chi tiết & Cờ thông dụng</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>touch</code></td>
+                  <td><code>touch app.js index.html</code></td>
+                  <td>Tạo một hoặc nhiều tệp tin rỗng mới. Nếu tệp đã có sẵn, cập nhật thời gian sửa đổi (timestamp) mà không làm mất nội dung.</td>
+                </tr>
+                <tr>
+                  <td><code>mkdir</code></td>
+                  <td><code>mkdir -p /var/www/project/assets/css</code></td>
+                  <td>
+                    <em>Make Directory</em>: Tạo thư mục mới.<br>
+                    • Cờ <span class="badge-tag yellow">-p</span> (parents): <strong>Tự động tạo toàn bộ chuỗi thư mục cha</strong> nếu chúng chưa tồn tại. Không báo lỗi nếu thư mục đã có.
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>cat</code></td>
+                  <td><code>cat /etc/nginx/nginx.conf</code></td>
+                  <td>In toàn bộ nội dung của tệp ra thẳng màn hình terminal. Thích hợp cho file ngắn (dưới 50 dòng).</td>
+                </tr>
+                <tr>
+                  <td><code>less</code></td>
+                  <td><code>less /var/log/syslog</code></td>
+                  <td>Xem tệp dài có phân trang: cuộn bằng phím mũi tên hoặc <code>Space</code>, tìm kiếm bằng <code>/từ_khóa</code>, nhấn <code>q</code> để thoát.</td>
+                </tr>
+                <tr>
+                  <td><code>head</code> / <code>tail</code></td>
+                  <td>
+                    <code>head -n 20 error.log</code><br>
+                    <code>tail -n 30 error.log</code><br>
+                    <code>tail -f /var/log/nginx/access.log</code>
+                  </td>
+                  <td>
+                    • <code>head -n 20</code>: Xem 20 dòng đầu tiên.<br>
+                    • <code>tail -n 30</code>: Xem 30 dòng cuối cùng.<br>
+                    • <span class="badge-tag red">-f</span> (follow): <strong>CỰC KỲ QUAN TRỌNG</strong> trong DevOps: Giữ mở và theo dõi dòng log mới nhất được ghi vào theo thời gian thực (nhấn <code>Ctrl + C</code> để dừng).
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>nano</code></td>
+                  <td><code>nano /etc/nginx/nginx.conf</code></td>
+                  <td>Trình soạn thảo văn bản đơn giản, thân thiện: Lưu file nhấn <code>Ctrl + O</code> rồi Enter, thoát nhấn <code>Ctrl + X</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>vim</code></td>
+                  <td><code>vim index.html</code></td>
+                  <td>
+                    Trình soạn thảo chuyên nghiệp mặc định trên mọi Linux Server:<br>
+                    • Nhấn phím <code>i</code> để vào chế độ gõ (Insert mode).<br>
+                    • Nhấn phím <code>Esc</code> để về Normal mode.<br>
+                    • Gõ <code>:wq</code> rồi Enter: Lưu và thoát.<br>
+                    • Gõ <code>:q!</code> rồi Enter: Thoát mà KHÔNG lưu thay đổi.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- 1.4 Sao chép, Di chuyển, Xóa -->
+        <article class="content-card" id="linux-saochep">
+          <h3 class="card-title">
+            <span class="icon-mini">📦</span> 1.4 Sao Chép, Di Chuyển, Đổi Tên & Xóa (cp, mv, rm)
+          </h3>
+
+          <div class="code-box">
+            <div class="code-header">
+              <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>
+              <span class="code-title">Terminal: Các thao tác cp, mv, rm</span>
+              <button class="btn-copy">Sao chép</button>
+            </div>
+            <div class="code-body">
+<code><span class="c-cmt"># 1. Sao chép tệp tin đơn lẻ: cp [nguồn] [đích]</span>
+<span class="c-cmd">cp</span> <span class="c-path">index.html</span> <span class="c-path">index.html.bak</span>
+
+<span class="c-cmt"># 2. Sao chép cả THƯ MỤC (Bắt buộc dùng cờ -r hoặc -R: recursive)</span>
+<span class="c-cmd">cp</span> <span class="c-flag">-r</span> <span class="c-path">/my-app</span> <span class="c-path">/var/www/my-app</span>
+
+<span class="c-cmt"># 3. Đổi tên tệp (Linux coi đổi tên là di chuyển đến tên mới)</span>
+<span class="c-cmd">mv</span> <span class="c-path">old-config.conf</span> <span class="c-path">new-config.conf</span>
+
+<span class="c-cmt"># 4. Di chuyển tệp tin sang thư mục khác</span>
+<span class="c-cmd">mv</span> <span class="c-path">main.js</span> <span class="c-path">/var/www/html/js/</span>
+
+<span class="c-cmt"># 5. Xóa tệp tin đơn lẻ</span>
+<span class="c-cmd">rm</span> <span class="c-path">temp.txt</span>
+
+<span class="c-cmt"># 6. Xóa thư mục có chứa dữ liệu (cờ -r: đệ quy, cờ -f: ép buộc, không hỏi xác nhận)</span>
+<span class="c-cmd">rm</span> <span class="c-flag">-rf</span> <span class="c-path">/var/www/old-website</span></code>
+            </div>
+          </div>
+
+          <div class="callout callout-danger">
+            <span class="callout-icon">⚠️</span>
+            <div>
+              <strong>CẢNH BÁO AN TOÀN DEVOPS TUYỆT ĐỐI:</strong><br>
+              Lệnh <code>rm -rf</code> trên Linux xóa vĩnh viễn và <strong>KHÔNG CÓ THÙNG RÁC (RECYCLE BIN)</strong>! Không bao giờ chạy lệnh <code>rm -rf /*</code> hoặc <code>rm -rf /</code> vì nó sẽ xóa sạch toàn bộ hệ điều hành VPS ngay lập tức. Luôn kiểm tra kỹ đường dẫn bằng <code>pwd</code> hoặc <code>ls</code> trước khi enter!
+            </div>
+          </div>
+        </article>
+
+        <!-- 1.5 Tìm kiếm & Lọc dữ liệu -->
+        <article class="content-card" id="linux-timkiem">
+          <h3 class="card-title">
+            <span class="icon-mini">🔍</span> 1.5 Tìm Kiếm & Lọc Dữ Liệu (find, grep, Pipe |)
+          </h3>
+
+          <p>Kỹ năng tìm file và tìm dòng văn bản trong code/config là kỹ năng phỏng vấn DevOps cốt lõi:</p>
+
+          <div class="code-box">
+            <div class="code-header">
+              <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>
+              <span class="code-title">Terminal: find & grep thực chiến</span>
+              <button class="btn-copy">Sao chép</button>
+            </div>
+            <div class="code-body">
+<code><span class="c-cmt"># A. Tìm kiếm FILE / THƯ MỤC theo tên bằng FIND:</span>
+<span class="c-cmt"># Tìm mọi file kết thúc bằng .conf trong thư mục /etc:</span>
+<span class="c-cmd">find</span> <span class="c-path">/etc</span> <span class="c-flag">-type f -name</span> <span class="c-str">"*.conf"</span>
+
+<span class="c-cmt"># Tìm file có dung lượng lớn hơn 100MB để dọn dẹp ổ đĩa:</span>
+<span class="c-cmd">find</span> <span class="c-path">/var/log</span> <span class="c-flag">-type f -size</span> <span class="c-str">+100M</span>
+
+<span class="c-cmt"># B. Tìm kiếm CHUỖI VĂN BẢN bên trong tệp tin bằng GREP:</span>
+<span class="c-cmt"># -r: đệ quy thư mục con, -n: in số dòng, -i: không phân biệt hoa thường</span>
+<span class="c-cmd">grep</span> <span class="c-flag">-rni</span> <span class="c-str">"server_name"</span> <span class="c-path">/etc/nginx/</span>
+
+<span class="c-cmt"># C. Kết hợp đường ống PIPE (|) để lọc kết quả đầu ra:</span>
+<span class="c-cmt"># Xem danh sách tiến trình đang chạy và chỉ lọc tiến trình Nginx:</span>
+<span class="c-cmd">ps</span> <span class="c-flag">aux</span> <span class="c-kw">|</span> <span class="c-cmd">grep</span> <span class="c-str">"nginx"</span>
+
+<span class="c-cmt"># Đếm số lượng request có mã lỗi 404 trong log:</span>
+<span class="c-cmd">cat</span> <span class="c-path">/var/log/nginx/access.log</span> <span class="c-kw">|</span> <span class="c-cmd">grep</span> <span class="c-str">" 404 "</span> <span class="c-kw">|</span> <span class="c-cmd">wc</span> <span class="c-flag">-l</span></code>
+            </div>
+          </div>
+        </article>
+
+        <!-- 1.6 Phân quyền & Sở hữu tệp -->
+        <article class="content-card" id="linux-phanquyen">
+          <h3 class="card-title">
+            <span class="icon-mini">🔐</span> 1.6 Phân Quyền & Sở Hữu Tệp (chmod, chown - Trọng Tâm Bài Thi)
+          </h3>
+
+          <p>
+            Mỗi tệp tin và thư mục trong Linux đều thuộc quyền quản lý của 3 đối tượng người dùng:
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0;">
+            <div style="background: var(--bg-input); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <strong style="color: var(--accent-yellow);">1. Owner (u):</strong> Người tạo ra tệp (Chủ sở hữu).
+            </div>
+            <div style="background: var(--bg-input); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <strong style="color: var(--accent-blue);">2. Group (g):</strong> Nhóm người dùng có chung quyền.
+            </div>
+            <div style="background: var(--bg-input); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <strong style="color: var(--accent-green);">3. Others (o):</strong> Bất kỳ ai khác trên hệ thống / người truy cập web.
+            </div>
+          </div>
+
+          <h4 style="margin: 1.25rem 0 0.5rem 0; font-size: 1rem;">Ý nghĩa chuỗi 10 ký tự quyền hạn (Ví dụ: <code>-rwxr-xr--</code>)</h4>
+          <div class="code-box">
+            <div class="code-body">
+<code><span class="c-str">-</span>        <span class="c-cmd">rwx</span>            <span class="c-flag">r-x</span>            <span class="c-path">r--</span>
+|          |              |              |
+Loại tệp  Owner (Chủ)    Group (Nhóm)   Others (Người khác)
+(-: file, (Read, Write,  (Read, Chạy,   (Chỉ đọc)
+ d: folder) Execute)     Không ghi)</code>
+            </div>
+          </div>
+
+          <h4 style="margin: 1.25rem 0 0.5rem 0; font-size: 1rem;">Quy đổi hệ nhị phân sang số Bát Phân (Octal Number):</h4>
+          <ul style="padding-left: 1.5rem; line-height: 1.8;">
+            <li><strong>r (Read - Đọc):</strong> Trọng số = <strong>4</strong></li>
+            <li><strong>w (Write - Ghi / Sửa / Xóa):</strong> Trọng số = <strong>2</strong></li>
+            <li><strong>x (Execute - Thực thi file nhị phân hoặc vào thư mục):</strong> Trọng số = <strong>1</strong></li>
+            <li><strong>- (Không có quyền):</strong> Trọng số = <strong>0</strong></li>
+          </ul>
+
+          <div class="table-responsive" style="margin-top: 1rem;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Mã số</th>
+                  <th>Ký hiệu</th>
+                  <th>Mô tả chi tiết</th>
+                  <th>Khi nào sử dụng trong thực tế?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="badge-tag green">755</span></td>
+                  <td><code>rwxr-xr-x</code></td>
+                  <td>Owner có toàn quyền (7), Group và Others chỉ có quyền Đọc & Thực thi (5).</td>
+                  <td><strong>Quyền chuẩn cho thư mục web</strong> (<code>/var/www/html</code>) và các file Bash Script.</td>
+                </tr>
+                <tr>
+                  <td><span class="badge-tag blue">644</span></td>
+                  <td><code>rw-r--r--</code></td>
+                  <td>Owner có quyền Đọc & Ghi (6), Group và Others chỉ có quyền Đọc (4).</td>
+                  <td><strong>Quyền chuẩn cho các file mã nguồn tĩnh</strong> (<code>index.html</code>, <code>style.css</code>, hình ảnh).</td>
+                </tr>
+                <tr>
+                  <td><span class="badge-tag red">777</span></td>
+                  <td><code>rwxrwxrwx</code></td>
+                  <td>Ai cũng có toàn quyền đọc, sửa, xóa và chạy chương trình.</td>
+                  <td><strong style="color: var(--accent-red);">Cực kỳ nguy hiểm!</strong> Tuyệt đối không dùng trên Production vì hacker có thể chèn webshell.</td>
+                </tr>
+                <tr>
+                  <td><span class="badge-tag yellow">400 / 600</span></td>
+                  <td><code>r--------</code> / <code>rw-------</code></td>
+                  <td>Chỉ duy nhất Owner được đọc (400) hoặc đọc/ghi (600), người khác bị cấm tuyệt đối.</td>
+                  <td>Bắt buộc cho SSH Private Key (<code>id_rsa</code>) và file bí mật (<code>.env</code>).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Lệnh chmod & chown -->
+          <div class="code-box">
+            <div class="code-header">
+              <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>
+              <span class="code-title">Terminal: Lệnh chmod & chown</span>
+              <button class="btn-copy">Sao chép</button>
+            </div>
+            <div class="code-body">
+<code><span class="c-cmt"># 1. Đổi quyền (CHMOD: Change Mode)</span>
+<span class="c-cmd">chmod</span> <span class="c-num">755</span> <span class="c-path">/var/www/html</span>
+<span class="c-cmd">chmod</span> <span class="c-num">644</span> <span class="c-path">/var/www/html/index.html</span>
+<span class="c-cmd">chmod</span> <span class="c-flag">+x</span> <span class="c-path">deploy.sh</span>  <span class="c-cmt"># Cấp thêm quyền thực thi (+x) cho script</span>
+
+<span class="c-cmt"># 2. Đổi chủ sở hữu (CHOWN: Change Owner)</span>
+<span class="c-cmt"># Cú pháp: chown -R [user]:[group] [thư mục]</span>
+<span class="c-cmd">chown</span> <span class="c-flag">-R</span> <span class="c-str">www-data:www-data</span> <span class="c-path">/var/www/html</span>
+<span class="c-cmt"># Giải thích: Gán quyền sở hữu cho user hệ thống www-data (user mà Nginx sử dụng để đọc web)</span></code>
+            </div>
+          </div>
+        </article>
+
+        <!-- 1.7 Nén, Dung lượng & Symlink -->
+        <article class="content-card" id="linux-nen">
+          <h3 class="card-title">
+            <span class="icon-mini">🗜️</span> 1.7 Nén, Giải Nén, Dung Lượng Ổ Đĩa & Symbolic Link
+          </h3>
+
+          <div class="code-box">
+            <div class="code-header">
+              <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>
+              <span class="code-title">Terminal: tar, df, du, ln -s</span>
+              <button class="btn-copy">Sao chép</button>
+            </div>
+            <div class="code-body">
+<code><span class="c-cmt"># 1. Nén thư mục thành file .tar.gz (c: create, z: gzip, v: verbose, f: file)</span>
+<span class="c-cmd">tar</span> <span class="c-flag">-czvf</span> <span class="c-path">backup-website.tar.gz</span> <span class="c-path">/var/www/html</span>
+
+<span class="c-cmt"># 2. Giải nén file .tar.gz vào thư mục đích (x: extract)</span>
+<span class="c-cmd">tar</span> <span class="c-flag">-xzvf</span> <span class="c-path">backup-website.tar.gz</span> <span class="c-flag">-C</span> <span class="c-path">/var/www/restored/</span>
+
+<span class="c-cmt"># 3. Kiểm tra dung lượng toàn bộ ổ cứng VPS (df: Disk Free, -h: Human-readable)</span>
+<span class="c-cmd">df</span> <span class="c-flag">-h</span>
+
+<span class="c-cmt"># 4. Kiểm tra dung lượng chi tiết của từng thư mục để tìm file rác (du: Disk Usage)</span>
+<span class="c-cmd">du</span> <span class="c-flag">-sh</span> <span class="c-path">/var/log/*</span>
+
+<span class="c-cmt"># 5. Tạo Symbolic Link (Liên kết mềm - Phím tắt trỏ đến file thực tế)</span>
+<span class="c-cmt"># Cực kỳ quan trọng để kích hoạt site trong Nginx:</span>
+<span class="c-cmd">ln</span> <span class="c-flag">-s</span> <span class="c-path">/etc/nginx/sites-available/mysite.conf</span> <span class="c-path">/etc/nginx/sites-enabled/</span></code>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ==============================================================
+           PHẦN 2: CÁC CÂU LỆNH THAO TÁC VỚI GIT FLOW
+           ============================================================== -->
+      <section class="topic-section git" id="phan-2-gitflow">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-badge git">🌿</div>
+            <div>
+              <h2 class="section-title">Phần 2: Các Câu Lệnh Thao Tác Với Git Flow</h2>
+              <p class="section-subtitle">Mô hình phân nhánh chuyên nghiệp tiêu chuẩn ngành cho nhóm phát triển và CI/CD</p>
+            </div>
+          </div>
+          <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; cursor: pointer;">
+            <input type="checkbox" class="topic-check" data-topic="git-p2"> Đã học xong phần 2
+          </label>
+        </div>
+
+        <!-- 2.1 Bản chất Git Flow -->
+        <article class="content-card" id="git-khainiem">
+          <h3 class="card-title">
+            <span class="icon-mini">💡</span> 2.1 Bản Chất Git Flow Là Gì? Tại Sao Cần Git Flow?
+          </h3>
+          <p>
+            <strong>Git Flow</strong> là một mô hình phân nhánh (Branching Model) được tác giả Vincent Driessen công bố năm 2010. Nó thiết lập một bộ quy tắc nghiêm ngặt về cách tổ chức và quản lý các nhánh trong kho mã nguồn Git cho dự án phần mềm có lịch trình phát hành (Scheduled Releases).
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin: 1.25rem 0;">
+            <div style="background: var(--bg-input); border-left: 4px solid var(--accent-red); padding: 1rem; border-radius: var(--radius-sm);">
+              <strong>Vấn đề khi KHÔNG dùng Git Flow:</strong>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.35rem;">
+                Mọi người commit chung lên <code>main</code> hoặc phân nhánh tùy tiện. Code đang dở dang bị đẩy lên Production gây sập app, khi có lỗi khẩn cấp không biết sửa từ đâu mà không kéo theo code chưa kiểm thử.
+              </p>
+            </div>
+            <div style="background: var(--bg-input); border-left: 4px solid var(--accent-green); padding: 1rem; border-radius: var(--radius-sm);">
+              <strong>Lợi ích khi ÁP DỤNG Git Flow:</strong>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.35rem;">
+                Tách biệt hoàn toàn giữa code đã phát hành (Production), code đang tích hợp (Development), và code đang làm tính năng. Dễ dàng tung bản vá nóng (Hotfix) trong 5 phút mà không đụng chạm đến code đang phát triển.
+              </p>
+            </div>
+          </div>
+
+          <!-- Interactive SVG Diagram: Git Flow Architecture -->
+          <div class="diagram-wrapper">
+            <svg viewBox="0 0 860 360" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+              <style>
+                .git-line { stroke-width: 3; fill: none; }
+                .line-main { stroke: #3b82f6; }
+                .line-hotfix { stroke: #ef4444; stroke-dasharray: 5,5; }
+                .line-release { stroke: #10b981; stroke-dasharray: 5,5; }
+                .line-develop { stroke: #f59e0b; }
+                .line-feature { stroke: #ec4899; }
+                .git-node { stroke-width: 2.5; stroke: #0b0f19; }
+                .git-node-main { fill: #3b82f6; }
+                .git-node-hotfix { fill: #ef4444; }
+                .git-node-release { fill: #10b981; }
+                .git-node-develop { fill: #f59e0b; }
+                .git-node-feature { fill: #ec4899; }
+                .branch-label { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; fill: #f3f4f6; }
+                .tag-label { font-family: 'Inter', sans-serif; font-size: 11px; fill: #94a3b8; }
+              </style>
+
+              <!-- Branch Labels on Left -->
+              <text x="30" y="55" class="branch-label" fill="#3b82f6">main (prod)</text>
+              <text x="30" y="125" class="branch-label" fill="#ef4444">hotfix/*</text>
+              <text x="30" y="195" class="branch-label" fill="#10b981">release/*</text>
+              <text x="30" y="265" class="branch-label" fill="#f59e0b">develop</text>
+              <text x="30" y="335" class="branch-label" fill="#ec4899">feature/*</text>
+
+              <!-- Main Line -->
+              <path d="M 180 50 L 800 50" class="git-line line-main" />
+              <!-- Develop Line -->
+              <path d="M 180 260 L 800 260" class="git-line line-develop" />
+
+              <!-- Feature branch out and back -->
+              <path d="M 240 260 Q 270 330 310 330 L 410 330 Q 450 330 480 260" class="git-line line-feature" />
+              
+              <!-- Release branch out and merge to main and develop -->
+              <path d="M 520 260 Q 545 190 575 190 L 650 190 Q 680 190 710 50" class="git-line line-release" />
+              <path d="M 650 190 Q 675 190 700 260" class="git-line line-release" />
+
+              <!-- Hotfix branch out from main and merge to main and develop -->
+              <path d="M 280 50 Q 305 120 335 120 L 410 120 Q 440 120 470 50" class="git-line line-hotfix" />
+              <path d="M 410 120 Q 440 120 470 260" class="git-line line-hotfix" />
+
+              <!-- Main Nodes & Tags -->
+              <circle cx="210" cy="50" r="7" class="git-node git-node-main" />
+              <text x="210" y="32" class="tag-label" text-anchor="middle">v1.0.0</text>
+
+              <circle cx="470" cy="50" r="7" class="git-node git-node-main" />
+              <text x="470" y="32" class="tag-label" text-anchor="middle">v1.0.1</text>
+
+              <circle cx="710" cy="50" r="7" class="git-node git-node-main" />
+              <text x="710" y="32" class="tag-label" text-anchor="middle">v1.1.0</text>
+
+              <!-- Hotfix Nodes -->
+              <circle cx="340" cy="120" r="6" class="git-node git-node-hotfix" />
+              <circle cx="400" cy="120" r="6" class="git-node git-node-hotfix" />
+
+              <!-- Release Nodes -->
+              <circle cx="585" cy="190" r="6" class="git-node git-node-release" />
+              <circle cx="645" cy="190" r="6" class="git-node git-node-release" />
+
+              <!-- Develop Nodes -->
+              <circle cx="210" cy="260" r="7" class="git-node git-node-develop" />
+              <circle cx="240" cy="260" r="6" class="git-node git-node-develop" />
+              <circle cx="470" cy="260" r="6" class="git-node git-node-develop" />
+              <circle cx="480" cy="260" r="7" class="git-node git-node-develop" />
+              <circle cx="520" cy="260" r="6" class="git-node git-node-develop" />
+              <circle cx="700" cy="260" r="7" class="git-node git-node-develop" />
+
+              <!-- Feature Nodes -->
+              <circle cx="320" cy="330" r="6" class="git-node git-node-feature" />
+              <circle cx="370" cy="330" r="6" class="git-node git-node-feature" />
+              <circle cx="400" cy="330" r="6" class="git-node git-node-feature" />
+            </svg>
+            <div class="diagram-caption">Sơ đồ: Mô hình 5 loại nhánh trong Git Flow và luồng tích hợp code chuẩn quốc tế</div>
+          </div>
+        </article>
+
+        <!-- 2.2 & 2.3 Phân loại các nhánh -->
+        <article class="content-card" id="git-nhanhchinh">
+          <h3 class="card-title">
+            <span class="icon-mini">🌳</span> 2.2 & 2.3 Phân Loại 5 Nhánh Trong Git Flow
+          </h3>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Tên nhánh</th>
+                  <th>Vòng đời</th>
+                  <th>Tách từ (Branch from)</th>
+                  <th>Merge quay về</th>
+                  <th>Mục đích sử dụng chính</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="badge-tag blue">main / master</span></td>
+                  <td>Vĩnh viễn</td>
+                  <td>Khởi tạo dự án</td>
+                  <td>Không (chỉ nhận merge)</td>
+                  <td>Chứa mã nguồn ổn định nhất đang chạy thực tế trên máy chủ Production. Mỗi commit tại đây luôn có một <strong>Git Tag</strong> (v1.0.0, v1.1.0).</td>
+                </tr>
+                <tr>
+                  <td><span class="badge-tag yellow">develop</span></td>
+                  <td>Vĩnh viễn</td>
+                  <td>Tách từ <code>main</code></td>
+                  <td>Không (chỉ nhận merge)</td>
+                  <td>Nhánh tích hợp trung tâm. Chứa tất cả mã nguồn mới nhất đã hoàn thành để chuẩn bị cho đợt phát hành kế tiếp.</td>
+                </tr>
+                <tr>
+                  <td><span class="badge-tag purple">feature/*</span></td>
+                  <td>Tạm thời</td>
+                  <td><code>develop</code></td>
+                  <td><code>develop</code></td>
+                  <td>Phát triển một tính năng cụ thể (VD: <code>feature/login</code>, <code>feature/cart</code>). Sau khi xong và test qua, merge lại vào develop rồi xóa nhánh.</td>
+                </tr>
+                <tr>
+                  <td><span class="badge-tag green">release/*</span></td>
+                  <td>Tạm thời</td>
+                  <td><code>develop</code></td>
+                  <td>CẢ <code>main</code> VÀ <code>develop</code></td>
+                  <td>Chuẩn bị phát hành phiên bản mới (VD: <code>release/v1.0.0</code>). <strong>Đóng băng tính năng mới</strong>, chỉ fix lỗi nhỏ cuối cùng, cập nhật số version và tài liệu.</td>
+                </tr>
+                <tr>
+                  <td><span class="badge-tag red">hotfix/*</span></td>
+                  <td>Tạm thời</td>
+                  <td><code>main</code></td>
+                  <td>CẢ <code>main</code> VÀ <code>develop</code></td>
+                  <td>Vá lỗi khẩn cấp xảy ra trực tiếp trên Production (VD: <code>hotfix/v1.0.1</code>). Sau khi sửa xong, merge vào main (gắn tag mới) và merge ngược về develop để develop cũng có bản vá.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- 2.4 Quy trình lệnh chi tiết -->
+        <article class="content-card" id="git-quytrinh">
+          <h3 class="card-title">
+            <span class="icon-mini">⚡</span> 2.4 Quy Trình Lệnh Git Flow Chi Tiết Bằng Câu Lệnh Thực Chiến
+          </h3>
+
+          <p>Dưới đây là 2 cách thực thi Git Flow: Bằng các câu lệnh <strong>Git Thuần Túy (Pure Git)</strong> (cách hay ra thi nhất) và dùng tiện ích <strong>git-flow CLI</strong>.</p>
+
+          <!-- Quy trình 1: Khởi tạo -->
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <h4 class="timeline-title">Bước 1: Khởi tạo kho mã nguồn & Nhánh Develop</h4>
+              <p class="timeline-desc">Tạo nhánh <code>develop</code> từ <code>main</code> lần đầu tiên.</p>
+              <div class="code-box">
+                <div class="code-header">
+                  <span class="code-title">Terminal: Khởi tạo</span>
+                  <button class="btn-copy">Sao chép</button>
+                </div>
+                <div class="code-body">
+<code><span class="c-cmt"># Cách 1: Git Thuần Túy</span>
+<span class="c-cmd">git</span> <span class="c-cmd">checkout</span> <span class="c-flag">-b</span> <span class="c-path">develop</span> <span class="c-path">main</span>
+<span class="c-cmd">git</span> <span class="c-cmd">push</span> <span class="c-flag">-u</span> <span class="c-str">origin develop</span>
+
+<span class="c-cmt"># Cách 2: Bằng git-flow tool (Tự động hỏi đặt tên nhánh mặc định)</span>
+<span class="c-cmd">git</span> <span class="c-cmd">flow init</span></code>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quy trình 2: Làm Feature -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <h4 class="timeline-title">Bước 2: Phát triển Tính Năng Mới (Feature)</h4>
+              <p class="timeline-desc">Ví dụ phát triển tính năng xác thực người dùng <code>feature/auth</code>.</p>
+              <div class="code-box">
+                <div class="code-header">
+                  <span class="code-title">Terminal: Feature Branch</span>
+                  <button class="btn-copy">Sao chép</button>
+                </div>
+                <div class="code-body">
+<code><span class="c-cmt"># 1. Tách nhánh feature từ develop:</span>
+<span class="c-cmd">git</span> <span class="c-cmd">checkout</span> <span class="c-path">develop</span>
+<span class="c-cmd">git</span> <span class="c-cmd">pull</span> <span class="c-str">origin develop</span>
+<span class="c-cmd">git</span> <span class="c-cmd">checkout</span> <span class="c-flag">-b</span> <span class="c-path">feature/auth</span> <span class="c-path">develop</span>
+
+<span class="c-cmt"># 2. Lập trình và commit:</span>
+<span class="c-cmd">git</span> <span class="c-cmd">add</span> <span class="c-path">.</span>
+<span class="c-cmd">git</span> <span class="c-cmd">commit</span> <span class="c-flag">-m</span> <span class="c-str">"feat: hoàn thành module đăng nhập người dùng"</span>
+
+<span class="c-cmt"># 3. Hoàn thành feature và merge lại vào develop:</span>
+<span class="c-cmd">git</span> <span class="c-cmd">checkout</span> <span class="c-path">develop</span>
+<span class="c-cmd">git</span> <span class="c-cmd">merge</span> <span class="c-flag">--no-ff</span> <span class="c-path">feature/auth</span>
+<span class="c-cmd">git</span> <span class="c-cmd">push</span> <span class="c-str">origin develop</span>
+
+<span class="c-cmt"># 4. Xóa nhánh feature cục bộ sau khi đã merge thành công:</span>
+<span class="c-cmd">git</span> <span class="c-cmd">branch</span> <span class="c-flag">-d</span> <span class="c-path">feature/auth</span></code>
+                </div>
+              </div>
+              <div class="callout callout-tip">
+                <span class="callout-icon">💡</span>
+                <div>
+                  <strong>Tại sao BẮT BUỘC dùng <code>git merge --no-ff</code>?</strong><br>
+                  Cờ <code>--no-ff</code> (No Fast-Forward) yêu cầu Git luôn luôn tạo ra một Commit Merge riêng biệt ngay cả khi có thể tua nhanh. Điều này giúp toàn bộ nhóm commit của tính năng được gói gọn, dễ truy vết lịch sử hoặc revert nguyên cả cụm tính năng khi gặp lỗi.
+                </div>
+              </div>
+            </div>
+
+            <!-- Quy trình 3: Release -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <h4 class="timeline-title">Bước 3: Chuẩn bị Bản Phát Hành (Release)</h4>
+              <p class="timeline-desc">Khi develop đã tích lũy đủ tính năng để phát hành phiên bản <code>v1.0.0</code>.</p>
+              <div class="code-box">
+                <div class="code-header">
+                  <span class="code-title">Terminal: Release Branch</span>
+                  <button class="btn-copy">Sao chép</button>
+                </div>
+                <div class="code-body">
+<code><span class="c-cmt"># 1. Tách nhánh release từ develop:</span>
+<span class="c-cmd">git</span> <span class="c-cmd">checkout</span> <span class="c-flag">-b</span> <span class="c-path">release/v1.0.0</span> <span class="c-path">develop</span>
+
+<span class="c-cmt"># 2. Fix lỗi nhỏ, sửa file package.json / version, commit:</span>
+<span class="c-cmd">git</span> <span class="c-cmd">commit</span> <span class="c-flag">-am</span> <span class="c-str">"bump version to v1.0.0 and polish docs"</span>
+
+<span class="c-cmt"># 3. Merge vào nhánh MAIN và gắn TAG phiên bản:</span>
+<span class="c-cmd">git</span> <span class="c-cmd">checkout</span> <span class="c-path">main</span>
+<span class="c-cmd">git</span> <span class="c-cmd">merge</span> <span class="c-flag">--no-ff</span> <span class="c-path">release/v1.0.0</span>
+<span class="c-cmd">git</span> <span class="c-cmd">tag</span> <span class="c-flag">-a</span> <span class="c-str">v1.0.0</span> <span class="c-flag">-m</span> <span class="c-str">"Release phiên bản chính thức v1.0.0"</span>
+
+<span class="c-cmt"># 4. Merge ngược lại vào DEVELOP (để đồng bộ các bản vá trong lúc release):</span>
+<span class="c-cmd">git</span> <span class="c-cmd">checkout</span> <span class="c-path">develop</span>
+<span class="c-cmd">git</span> <span class="c-cmd">merge</span> <span class="c-flag">--no-ff</span> <span class="c-path">release/v1.0.0</span>
+
+<span class="c-cmt"># 5. Xóa nhánh release và đẩy tags lên remote:</span>
+<span class="c-cmd">git</span> <span class="c-cmd">branch</span> <span class="c-flag">-d</span> <span class="c-path">release/v1.0.0</span>
+<span class="c-cmd">git</span> <span class="c-cmd">push</span> <span class="c-str">origin main --tags</span>
+<span class="c-cmd">git</span> <span class="c-cmd">push</span> <span class="c-str">origin develop</span></code>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quy trình 4: Hotfix -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <h4 class="timeline-title">Bước 4: Xử lý Sự Cố Khẩn Cấp Trên Production (Hotfix)</h4>
+              <p class="timeline-desc">Phát hiện lỗi nghiêm trọng trên máy chủ thật đang chạy <code>v1.0.0</code>.</p>
+              <div class="code-box">
+                <div class="code-header">
+                  <span class="code-title">Terminal: Hotfix Branch</span>
+                  <button class="btn-copy">Sao chép</button>
+                </div>
+                <div class="code-body">
+<code><span class="c-cmt"># 1. Tách nhánh hotfix trực tiếp từ MAIN:</span>
+<span class="c-cmd">git</span> <span class="c-cmd">checkout</span> <span class="c-flag">-b</span> <span class="c-path">hotfix/v1.0.1</span> <span class="c-path">main</span>
+
+<span class="c-cmt"># 2. Vá lỗi và commit:</span>
+<span class="c-cmd">git</span> <span class="c-cmd">commit</span> <span class="c-flag">-am</span> <span class="c-str">"fix: vá lỗi bảo mật SQL Injection khẩn cấp"</span>
+
+<span class="c-cmt"># 3. Merge vào MAIN và gắn Tag phiên bản mới v1.0.1:</span>
+<span class="c-cmd">git</span> <span class="c-cmd">checkout</span> <span class="c-path">main</span>
+<span class="c-cmd">git</span> <span class="c-cmd">merge</span> <span class="c-flag">--no-ff</span> <span class="c-path">hotfix/v1.0.1</span>
+<span class="c-cmd">git</span> <span class="c-cmd">tag</span> <span class="c-flag">-a</span> <span class="c-str">v1.0.1</span> <span class="c-flag">-m</span> <span class="c-str">"Hotfix v1.0.1 khẩn cấp"</span>
+
+<span class="c-cmt"># 4. BẮT BUỘC: Merge ngược lại vào DEVELOP (tránh bị mất bản vá trong các lần release sau):</span>
+<span class="c-cmd">git</span> <span class="c-cmd">checkout</span> <span class="c-path">develop</span>
+<span class="c-cmd">git</span> <span class="c-cmd">merge</span> <span class="c-flag">--no-ff</span> <span class="c-path">hotfix/v1.0.1</span>
+
+<span class="c-cmt"># 5. Xóa nhánh hotfix và đẩy lên remote:</span>
+<span class="c-cmd">git</span> <span class="c-cmd">branch</span> <span class="c-flag">-d</span> <span class="c-path">hotfix/v1.0.1</span>
+<span class="c-cmd">git</span> <span class="c-cmd">push</span> <span class="c-str">origin main --tags</span>
+<span class="c-cmd">git</span> <span class="c-cmd">push</span> <span class="c-str">origin develop</span></code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2.5 Lệnh bổ trợ & Lỗi thường gặp -->
+        <article class="content-card" id="git-bangtracuu">
+          <h3 class="card-title">
+            <span class="icon-mini">📋</span> 2.5 Các Lệnh Git Bổ Trợ Đắc Lực & Quy Tắc Vàng
+          </h3>
+
+          <div class="code-box">
+            <div class="code-header">
+              <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>
+              <span class="code-title">Terminal: Lệnh Git hữu ích thường dùng trong Git Flow</span>
+              <button class="btn-copy">Sao chép</button>
+            </div>
+            <div class="code-body">
+<code><span class="c-cmt"># Xem cây lịch sử commit trực quan dạng đồ thị ngay trên terminal:</span>
+<span class="c-cmd">git</span> <span class="c-cmd">log</span> <span class="c-flag">--oneline --graph --all --decorate</span>
+
+<span class="c-cmt"># Cất tạm code đang làm dở khi phải chuyển gấp sang nhánh hotfix:</span>
+<span class="c-cmd">git</span> <span class="c-cmd">stash</span>
+<span class="c-cmd">git</span> <span class="c-cmd">stash pop</span>  <span class="c-cmt"># Lấy lại code sau khi sửa hotfix xong</span>
+
+<span class="c-cmt"># Xem danh sách tất cả các nhánh (cả local và remote):</span>
+<span class="c-cmd">git</span> <span class="c-cmd">branch</span> <span class="c-flag">-a</span>
+
+<span class="c-cmt"># Xóa nhánh trên remote repository:</span>
+<span class="c-cmd">git</span> <span class="c-cmd">push</span> <span class="c-str">origin --delete feature/auth</span></code>
+            </div>
+          </div>
+
+          <div class="callout callout-warning">
+            <span class="callout-icon">📌</span>
+            <div>
+              <strong>3 QUY TẮC VÀNG TRONG BÀI THI & DỰ ÁN DEVOPS:</strong>
+              <ol style="margin-top: 0.35rem; padding-left: 1.2rem; line-height: 1.7;">
+                <li><strong>Không bao giờ commit trực tiếp lên <code>main</code></strong> (Trừ khi merge từ release hoặc hotfix).</li>
+                <li><strong>Hotfix luôn phải merge vào CẢ HAI nhánh:</strong> <code>main</code> VÀ <code>develop</code>. Nếu quên merge về develop, lần release sau sẽ làm tái diễn lỗi cũ!</li>
+                <li><strong>Luôn kéo code mới nhất (<code>git pull</code>)</strong> trước khi tạo nhánh mới hoặc trước khi merge để hạn chế tối đa xung đột (Merge Conflict).</li>
+              </ol>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ==============================================================
+           PHẦN 3: NGINX VÀ DEPLOY ỨNG DỤNG NGINX VỚI HTML
+           ============================================================== -->
+      <section class="topic-section nginx" id="phan-3-nginx">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-badge nginx">⚡</div>
+            <div>
+              <h2 class="section-title">Phần 3: Nginx & Quy Trình Deploy Ứng Dụng HTML</h2>
+              <p class="section-subtitle">Kiến trúc Web Server, cấu hình Virtual Host và triển khai ứng dụng tĩnh thực chiến</p>
+            </div>
+          </div>
+          <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; cursor: pointer;">
+            <input type="checkbox" class="topic-check" data-topic="nginx-p3"> Đã học xong phần 3
+          </label>
+        </div>
+
+        <!-- 3.1 Nginx là gì -->
+        <article class="content-card" id="nginx-khainiem">
+          <h3 class="card-title">
+            <span class="icon-mini">🌐</span> 3.1 Nginx Là Gì? Tại Sao Nginx Lại Thống Trị DevOps?
+          </h3>
+          <p>
+            <strong>Nginx</strong> (phát âm là <em>"Engine-X"</em>) là một phần mềm mã nguồn mở nổi tiếng đóng vai trò là:
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1rem 0;">
+            <div style="background: var(--bg-input); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <strong style="color: var(--accent-green);">1. Web Server Tốc Độ Cao:</strong>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">Phục vụ file tĩnh (HTML, CSS, JS, Image) cực kỳ nhanh với mức tiêu thụ RAM tối thiểu.</p>
+            </div>
+            <div style="background: var(--bg-input); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <strong style="color: var(--accent-blue);">2. Reverse Proxy:</strong>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">Đứng trước che giấu Backend (NodeJS, Java Spring, Python Django), chuyển tiếp request an toàn.</p>
+            </div>
+            <div style="background: var(--bg-input); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <strong style="color: var(--accent-yellow);">3. Load Balancer:</strong>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.25rem;">Cân bằng tải phân phối lượng truy cập khổng lồ giữa nhiều server backend khác nhau.</p>
+            </div>
+          </div>
+
+          <p>
+            <strong>Bí quyết hiệu năng của Nginx:</strong> Thay vì tạo một luồng (thread) mới cho mỗi khách hàng như Apache (dễ gây cạn kiệt RAM khi có 10.000 kết nối - vấn đề <em>C10K</em>), Nginx sử dụng <strong>kiến trúc hướng sự kiện bất đồng bộ (Asynchronous Event-driven Architecture)</strong>, cho phép một tiến trình đơn (Worker Process) xử lý đồng thời hàng nghìn request mà bộ nhớ chỉ tốn vài chục Megabytes.
+          </p>
+
+          <!-- SVG Diagram: Nginx Request Handling -->
+          <div class="diagram-wrapper">
+            <svg viewBox="0 0 820 200" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+              <style>
+                .ng-box { fill: #1e293b; stroke: #10b981; stroke-width: 1.5; rx: 8; }
+                .ng-box-active { fill: #065f46; stroke: #34d399; stroke-width: 2; rx: 8; }
+                .ng-text { fill: #f3f4f6; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; text-anchor: middle; }
+                .ng-sub { fill: #94a3b8; font-family: 'Inter', sans-serif; font-size: 11px; text-anchor: middle; }
+                .ng-arrow { stroke: #3b82f6; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+              </style>
+              <defs>
+                <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/>
+                </marker>
+              </defs>
+
+              <!-- Client -->
+              <rect x="20" y="70" width="130" height="60" class="ng-box" />
+              <text x="85" y="98" class="ng-text">Client</text>
+              <text x="85" y="116" class="ng-sub">Trình duyệt Web</text>
+
+              <line x1="150" y1="100" x2="225" y2="100" class="ng-arrow" />
+              <text x="187" y="90" class="ng-sub" fill="#60a5fa">Port 80/443</text>
+
+              <!-- Nginx Server -->
+              <rect x="235" y="45" width="230" height="110" class="ng-box-active" />
+              <text x="350" y="75" class="ng-text">NGINX Web Server</text>
+              <text x="350" y="95" class="ng-sub">• Lắng nghe Port 80 / 443</text>
+              <text x="350" y="113" class="ng-sub">• Khớp domain server_name</text>
+              <text x="350" y="131" class="ng-sub">• Ánh xạ thư mục root</text>
+
+              <line x1="465" y1="100" x2="540" y2="100" class="ng-arrow" />
+              <text x="502" y="90" class="ng-sub" fill="#34d399">Đọc file</text>
+
+              <!-- Static Storage -->
+              <rect x="550" y="70" width="240" height="60" class="ng-box" />
+              <text x="670" y="98" class="ng-text">/var/www/my-project</text>
+              <text x="670" y="116" class="ng-sub">index.html, style.css, app.js</text>
+            </svg>
+            <div class="diagram-caption">Sơ đồ: Luồng xử lý một Request HTTP trang tĩnh HTML thông qua Nginx</div>
+          </div>
+        </article>
+
+        <!-- 3.2 Cài đặt & Quản lý systemctl -->
+        <article class="content-card" id="nginx-caidat">
+          <h3 class="card-title">
+            <span class="icon-mini">⚙️</span> 3.2 Cài Đặt & Các Lệnh Quản Lý Nginx (systemctl, nginx -t)
+          </h3>
+
+          <div class="code-box">
+            <div class="code-header">
+              <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>
+              <span class="code-title">Terminal: Cài đặt và quản lý Nginx trên Ubuntu/Debian</span>
+              <button class="btn-copy">Sao chép</button>
+            </div>
+            <div class="code-body">
+<code><span class="c-cmt"># 1. Cập nhật danh sách gói và cài đặt Nginx:</span>
+<span class="c-cmd">sudo apt</span> <span class="c-cmd">update</span>
+<span class="c-cmd">sudo apt</span> <span class="c-cmd">install</span> <span class="c-flag">-y</span> <span class="c-str">nginx</span>
+
+<span class="c-cmt"># 2. KIỂM TRA CÚ PHÁP CẤU HÌNH (BẮT BUỘC CHẠY TRƯỚC MỌI LẦN RELOAD):</span>
+<span class="c-cmd">sudo nginx</span> <span class="c-flag">-t</span>
+<span class="c-cmt"># Nếu ra "syntax is ok" và "test is successful" mới được tiếp tục!</span>
+
+<span class="c-cmt"># 3. Nạp lại cấu hình mượt mà KHÔNG làm gián đoạn người dùng (Zero Downtime):</span>
+<span class="c-cmd">sudo systemctl</span> <span class="c-cmd">reload</span> <span class="c-str">nginx</span>
+
+<span class="c-cmt"># 4. Kiểm tra trạng thái hoạt động:</span>
+<span class="c-cmd">sudo systemctl</span> <span class="c-cmd">status</span> <span class="c-str">nginx</span>
+
+<span class="c-cmt"># 5. Các lệnh vòng đời dịch vụ khác:</span>
+<span class="c-cmd">sudo systemctl</span> <span class="c-cmd">start</span> <span class="c-str">nginx</span>      <span class="c-cmt"># Khởi động dịch vụ</span>
+<span class="c-cmd">sudo systemctl</span> <span class="c-cmd">stop</span> <span class="c-str">nginx</span>       <span class="c-cmt"># Dừng dịch vụ</span>
+<span class="c-cmd">sudo systemctl</span> <span class="c-cmd">restart</span> <span class="c-str">nginx</span>    <span class="c-cmt"># Khởi động lại toàn bộ (ngắt kết nối)</span>
+<span class="c-cmd">sudo systemctl</span> <span class="c-cmd">enable</span> <span class="c-str">nginx</span>     <span class="c-cmt"># Cho phép tự khởi động cùng VPS khi boot</span></code>
+            </div>
+          </div>
+
+          <div class="callout callout-info">
+            <span class="callout-icon">💡</span>
+            <div>
+              <strong>So sánh <code>systemctl restart</code> vs <code>systemctl reload</code>:</strong>
+              <p style="margin-top: 0.25rem; font-size: 0.875rem;">
+                • <code>restart</code>: Tắt hoàn toàn tiến trình master và các worker rồi bật lại từ đầu. Gây mất kết nối tạm thời đối với khách hàng đang tải trang.<br>
+                • <code>reload</code>: Giữ nguyên tiến trình master, kiểm tra config và khởi tạo các worker mới theo cấu hình mới, sau đó từ từ đóng các worker cũ khi họ phục vụ xong. <strong>Luôn ưu tiên dùng reload trên Production!</strong>
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3.3 Cấu trúc thư mục Nginx -->
+        <article class="content-card" id="nginx-cautruc">
+          <h3 class="card-title">
+            <span class="icon-mini">📂</span> 3.3 Cấu Trúc Thư Mục Nginx Cốt Lõi Trên VPS
+          </h3>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Đường dẫn</th>
+                  <th>Loại</th>
+                  <th>Chức năng & Ý nghĩa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>/etc/nginx/nginx.conf</code></td>
+                  <td>File cấu hình</td>
+                  <td>File cấu hình tổng thể (Global Configuration) điều khiển số lượng worker, luồng sự kiện, kiểu MIME và nạp các site con.</td>
+                </tr>
+                <tr>
+                  <td><code>/etc/nginx/sites-available/</code></td>
+                  <td>Thư mục</td>
+                  <td>Nơi lưu trữ file cấu hình của tất cả các trang web <em>có sẵn</em> (nhưng chưa kích hoạt chạy).</td>
+                </tr>
+                <tr>
+                  <td><code>/etc/nginx/sites-enabled/</code></td>
+                  <td>Thư mục</td>
+                  <td>Nơi chứa các <strong>liên kết mềm (Symbolic Link)</strong> trỏ từ <code>sites-available</code> sang. Chỉ những file có mặt ở đây mới được Nginx nạp chạy!</td>
+                </tr>
+                <tr>
+                  <td><code>/var/www/html/</code></td>
+                  <td>Thư mục</td>
+                  <td>Thư mục gốc mặc định chứa trang chào mừng Nginx (chứa <code>index.nginx-debian.html</code>).</td>
+                </tr>
+                <tr>
+                  <td><code>/var/log/nginx/access.log</code></td>
+                  <td>File Log</td>
+                  <td>Ghi lại mọi lượt truy cập của người dùng (Địa chỉ IP, thời gian, URL, mã phản hồi HTTP, trình duyệt).</td>
+                </tr>
+                <tr>
+                  <td><code>/var/log/nginx/error.log</code></td>
+                  <td>File Log</td>
+                  <td>Ghi lại mọi lỗi phát sinh (Lỗi cú pháp, quyền truy cập 403, file không tồn tại 404, sập upstream 502).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- 3.4 Cấu hình Virtual Host tĩnh -->
+        <article class="content-card" id="nginx-serverblock">
+          <h3 class="card-title">
+            <span class="icon-mini">📝</span> 3.4 Cấu Hình Server Block (Virtual Host) Chi Tiết Cho Ứng Dụng HTML
+          </h3>
+
+          <p>
+            Mỗi website tĩnh được định nghĩa bằng một khối lệnh <code>server { ... }</code>. Dưới đây là file cấu hình chuẩn mẫu và phân tích cặn kẽ từng dòng:
+          </p>
+
+          <div class="code-box">
+            <div class="code-header">
+              <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>
+              <span class="code-title">/etc/nginx/sites-available/my-static-web.conf</span>
+              <button class="btn-copy">Sao chép</button>
+            </div>
+            <div class="code-body">
+<code><span class="c-kw">server</span> {
+    <span class="c-cmt"># 1. Cổng lắng nghe (80 là cổng chuẩn HTTP mặc định)</span>
+    <span class="c-cmd">listen</span> <span class="c-num">80</span>;
+    <span class="c-cmd">listen</span> [::]:<span class="c-num">80</span>; <span class="c-cmt"># Hỗ trợ IPv6</span>
+
+    <span class="c-cmt"># 2. Tên miền hoặc địa chỉ IP của VPS</span>
+    <span class="c-cmd">server_name</span> <span class="c-str">demo-devops.com www.demo-devops.com 192.168.1.100</span>;
+
+    <span class="c-cmt"># 3. Đường dẫn tuyệt đối đến thư mục chứa mã nguồn HTML/CSS</span>
+    <span class="c-cmd">root</span> <span class="c-path">/var/www/my-static-web</span>;
+
+    <span class="c-cmt"># 4. Tệp tin mặc định phục vụ khi người dùng vào trang chủ</span>
+    <span class="c-cmd">index</span> <span class="c-str">index.html index.htm</span>;
+
+    <span class="c-cmt"># 5. Định tuyến xử lý request</span>
+    <span class="c-kw">location</span> / {
+        <span class="c-cmt"># Thử tìm file theo đúng URL ($uri), nếu không có thử tìm thư mục ($uri/),</span>
+        <span class="c-cmt"># Nếu vẫn không thấy thì trả về lỗi 404 (hoặc trỏ về /index.html nếu là SPA React/Vue)</span>
+        <span class="c-cmd">try_files</span> <span class="c-str">$uri $uri/ =404</span>;
+    }
+
+    <span class="c-cmt"># 6. Tối ưu bộ nhớ Cache cho các tệp tĩnh (CSS, JS, Ảnh)</span>
+    <span class="c-kw">location</span> ~* \.(css|js|jpg|jpeg|png|gif|ico|svg|woff2)$ {
+        <span class="c-cmd">expires</span> <span class="c-str">30d</span>;
+        <span class="c-cmd">add_header</span> <span class="c-str">Cache-Control "public, no-transform"</span>;
+    }
+
+    <span class="c-cmt"># 7. Trang thông báo lỗi tùy biến (Custom Error Page)</span>
+    <span class="c-cmd">error_page</span> <span class="c-num">404</span> <span class="c-path">/404.html</span>;
+    <span class="c-kw">location</span> = /404.html {
+        <span class="c-cmd">internal</span>;
+    }
+}</code>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Chỉ thị (Directive)</th>
+                  <th>Ý nghĩa cốt lõi cần nhớ khi làm bài</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>listen</code></td>
+                  <td>Khai báo cổng TCP mà Nginx tiếp nhận kết nối (HTTP dùng cổng 80, HTTPS dùng cổng 443).</td>
+                </tr>
+                <tr>
+                  <td><code>server_name</code></td>
+                  <td>Định danh trang web: domain hoặc IP. Nginx so khớp trường Host trong header request với directive này để biết phải phục vụ website nào.</td>
+                </tr>
+                <tr>
+                  <td><code>root</code></td>
+                  <td>Thư mục chứa mã nguồn trên ổ cứng VPS. Nếu request là <code>/style.css</code>, Nginx tìm ở <code>/var/www/my-static-web/style.css</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>index</code></td>
+                  <td>Tên file hiển thị đầu tiên khi client không chỉ định tên file cụ thể.</td>
+                </tr>
+                <tr>
+                  <td><code>try_files $uri $uri/ =404</code></td>
+                  <td>Cực kỳ quan trọng: Giúp kiểm tra xem file có tồn tại trên đĩa không trước khi trả về mã lỗi.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- 3.5 9 Bước Deploy HTML từ A-Z -->
+        <article class="content-card" id="nginx-deploy">
+          <h3 class="card-title">
+            <span class="icon-mini">🚀</span> 3.5 Quy Trình 9 Bước Deploy Ứng Dụng HTML Lên Nginx Từ A Đến Z
+          </h3>
+
+          <p>Quy trình thực tế từng bước một được tóm lược chuẩn xác để áp dụng ngay trong đồ án và bài thi:</p>
+
+          <div class="timeline">
+            <!-- Step 1 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <h4 class="timeline-title">Bước 1: Cài đặt Nginx trên VPS</h4>
+              <p class="timeline-desc">Kết nối SSH vào VPS bằng PuTTY/Terminal: <code>ssh root@your_vps_ip</code> và cài đặt Nginx.</p>
+              <div class="code-box">
+                <div class="code-header"><span class="code-title">Bash</span><button class="btn-copy">Sao chép</button></div>
+                <div class="code-body">
+<code><span class="c-cmd">sudo apt</span> <span class="c-cmd">update</span> <span class="c-kw">&amp;&amp;</span> <span class="c-cmd">sudo apt</span> <span class="c-cmd">install</span> <span class="c-flag">-y</span> <span class="c-str">nginx</span></code>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <h4 class="timeline-title">Bước 2: Tạo thư mục chứa mã nguồn website</h4>
+              <p class="timeline-desc">Tạo thư mục dành riêng cho dự án tại <code>/var/www/</code>.</p>
+              <div class="code-box">
+                <div class="code-header"><span class="code-title">Bash</span><button class="btn-copy">Sao chép</button></div>
+                <div class="code-body">
+<code><span class="c-cmd">sudo mkdir</span> <span class="c-flag">-p</span> <span class="c-path">/var/www/my-portfolio</span></code>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <h4 class="timeline-title">Bước 3: Đưa mã nguồn HTML/CSS/JS lên VPS</h4>
+              <p class="timeline-desc">Có thể chọn 1 trong 3 cách tùy vào công cụ bạn có:</p>
+              <div class="code-box">
+                <div class="code-header"><span class="code-title">Bash: Các cách upload code</span><button class="btn-copy">Sao chép</button></div>
+                <div class="code-body">
+<code><span class="c-cmt"># Cách A (Khuyên dùng trong DevOps): Dùng Git Clone trực tiếp từ GitHub</span>
+<span class="c-cmd">sudo git</span> <span class="c-cmd">clone</span> <span class="c-str">https://github.com/myusername/my-portfolio.git</span> <span class="c-path">/var/www/my-portfolio</span>
+
+<span class="c-cmt"># Cách B: Copy từ máy tính cá nhân lên VPS qua lệnh SCP (chạy trên máy cá nhân)</span>
+<span class="c-cmd">scp</span> <span class="c-flag">-r</span> <span class="c-path">./dist/*</span> <span class="c-str">root@123.45.67.89:/var/www/my-portfolio/</span>
+
+<span class="c-cmt"># Cách C: Tạo nhanh file index.html mẫu để test</span>
+<span class="c-cmd">sudo bash</span> <span class="c-flag">-c</span> <span class="c-str">'echo "&lt;h1&gt;Deploy PTIT DevOps Thành Công!&lt;/h1&gt;" &gt; /var/www/my-portfolio/index.html'</span></code>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <h4 class="timeline-title">Bước 4: Phân quyền sở hữu tệp cho Nginx</h4>
+              <p class="timeline-desc">Đảm bảo người dùng dịch vụ <code>www-data</code> có toàn quyền đọc mã nguồn để tránh lỗi 403 Forbidden.</p>
+              <div class="code-box">
+                <div class="code-header"><span class="code-title">Bash</span><button class="btn-copy">Sao chép</button></div>
+                <div class="code-body">
+<code><span class="c-cmd">sudo chown</span> <span class="c-flag">-R</span> <span class="c-str">www-data:www-data</span> <span class="c-path">/var/www/my-portfolio</span>
+<span class="c-cmd">sudo chmod</span> <span class="c-flag">-R</span> <span class="c-num">755</span> <span class="c-path">/var/www/my-portfolio</span></code>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <h4 class="timeline-title">Bước 5: Tạo file cấu hình Virtual Host mới</h4>
+              <p class="timeline-desc">Tạo file cấu hình tại <code>sites-available</code>.</p>
+              <div class="code-box">
+                <div class="code-header"><span class="code-title">Bash</span><button class="btn-copy">Sao chép</button></div>
+                <div class="code-body">
+<code><span class="c-cmd">sudo nano</span> <span class="c-path">/etc/nginx/sites-available/my-portfolio.conf</span></code>
+                </div>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.35rem;">Dán nội dung cấu hình <code>server { listen 80; ... }</code> như mục 3.4 rồi lưu lại (Ctrl+O, Enter, Ctrl+X).</p>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <h4 class="timeline-title">Bước 6: Kích hoạt Virtual Host bằng Symbolic Link</h4>
+              <p class="timeline-desc">Tạo liên kết tượng trưng sang <code>sites-enabled</code>.</p>
+              <div class="code-box">
+                <div class="code-header"><span class="code-title">Bash</span><button class="btn-copy">Sao chép</button></div>
+                <div class="code-body">
+<code><span class="c-cmd">sudo ln</span> <span class="c-flag">-s</span> <span class="c-path">/etc/nginx/sites-available/my-portfolio.conf</span> <span class="c-path">/etc/nginx/sites-enabled/</span></code>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 7 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <h4 class="timeline-title">Bước 7: Kiểm tra cú pháp và Reload Nginx</h4>
+              <p class="timeline-desc">Kiểm tra an toàn trước khi nạp thay đổi.</p>
+              <div class="code-box">
+                <div class="code-header"><span class="code-title">Bash</span><button class="btn-copy">Sao chép</button></div>
+                <div class="code-body">
+<code><span class="c-cmd">sudo nginx</span> <span class="c-flag">-t</span>
+<span class="c-cmd">sudo systemctl</span> <span class="c-cmd">reload</span> <span class="c-str">nginx</span></code>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 8 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <h4 class="timeline-title">Bước 8: Mở cổng Tường Lửa (UFW Firewall)</h4>
+              <p class="timeline-desc">Cho phép truy cập giao thức HTTP (cổng 80) và HTTPS (cổng 443).</p>
+              <div class="code-box">
+                <div class="code-header"><span class="code-title">Bash</span><button class="btn-copy">Sao chép</button></div>
+                <div class="code-body">
+<code><span class="c-cmd">sudo ufw</span> <span class="c-cmd">allow</span> <span class="c-str">'Nginx Full'</span>
+<span class="c-cmd">sudo ufw</span> <span class="c-cmd">status</span></code>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 9 -->
+            <div class="timeline-item success">
+              <div class="timeline-dot"></div>
+              <h4 class="timeline-title">Bước 9: Kiểm tra truy cập trên trình duyệt</h4>
+              <p class="timeline-desc">Mở trình duyệt gõ: <code>http://your_vps_ip</code> hoặc <code>http://demo-devops.com</code> để chiêm ngưỡng thành quả!</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3.6 Khắc phục lỗi thường gặp -->
+        <article class="content-card" id="nginx-troubleshoot">
+          <h3 class="card-title">
+            <span class="icon-mini">🛠️</span> 3.6 Bảng Tra Cứu Khắc Phục Lỗi Nginx Phổ Biến (Troubleshooting)
+          </h3>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Mã lỗi HTTP</th>
+                  <th>Nguyên nhân thực tế</th>
+                  <th>Cách khắc phục dứt điểm</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="badge-tag red">403 Forbidden</span></td>
+                  <td>
+                    1. Nginx không có quyền đọc thư mục <code>root</code>.<br>
+                    2. Trong thư mục không có file <code>index.html</code> và Nginx tắt tính năng duyệt thư mục (autoindex off).
+                  </td>
+                  <td>
+                    Chạy lại phân quyền:<br>
+                    <code>sudo chown -R www-data:www-data /var/www/my-app</code><br>
+                    <code>sudo chmod -R 755 /var/www/my-app</code><br>
+                    Kiểm tra xem tên file có đúng chính xác là <code>index.html</code> (chữ thường) hay không.
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="badge-tag yellow">404 Not Found</span></td>
+                  <td>
+                    1. Sai đường dẫn trong directive <code>root</code>.<br>
+                    2. File không tồn tại tại vị trí yêu cầu.<br>
+                    3. Lỗi cấu hình <code>try_files</code>.
+                  </td>
+                  <td>
+                    Mở file cấu hình kiểm tra lại directive <code>root /var/www/...;</code> xem đường dẫn có gõ sai chính tả không. Xem log chi tiết bằng: <code>tail -n 20 /var/log/nginx/error.log</code>.
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="badge-tag purple">502 Bad Gateway</span></td>
+                  <td>
+                    Xảy ra khi cấu hình Reverse Proxy nhưng ứng dụng backend phía sau (NodeJS/Java/Python) chưa được khởi động hoặc bị crash.
+                  </td>
+                  <td>
+                    Kiểm tra backend có đang chạy trên đúng port cấu hình không (ví dụ <code>curl http://localhost:3000</code>).
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="badge-tag blue">Nạp config không đổi</span></td>
+                  <td>
+                    Quên tạo symlink sang <code>sites-enabled/</code>, hoặc còn file cấu hình mặc định <code>default</code> ghi đè.
+                  </td>
+                  <td>
+                    Xóa file default: <code>sudo rm /etc/nginx/sites-enabled/default</code> rồi reload lại Nginx.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <!-- ==============================================================
+           PHẦN 4: CÔNG CỤ TƯƠNG TÁC & TRẮC NGHIỆM ÔN THI
+           ============================================================== -->
+      <section class="topic-section tools" id="phan-4-congcu">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-badge tools" style="background: var(--gradient-hero); color: #fff;">🧮</div>
+            <div>
+              <h2 class="section-title">Phần 4: Công Cụ Trực Quan & Trắc Nghiệm Thực Chiến</h2>
+              <p class="section-subtitle">Thực hành tính toán quyền Linux và làm bài test đánh giá kiến thức ngay trên trang</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tool: Permission Calculator -->
+        <article class="content-card">
+          <h3 class="card-title">
+            <span class="icon-mini">⚡</span> Công Cụ Tính Quyền Hạn Linux Tương Tác (Linux Permission Calculator)
+          </h3>
+          <p>
+            Tick chọn các quyền mong muốn để hệ thống tự động tính toán mã số Bát phân (Octal), chuỗi ký hiệu (Symbolic) và sinh lệnh <code>chmod</code> tương ứng:
+          </p>
+
+          <div class="calc-card">
+            <div style="margin-bottom: 1rem;">
+              <label style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 0.4rem;">Tên tệp/thư mục đích:</label>
+              <input type="text" id="calc-target-input" value="/var/www/html/index.html" style="background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-primary); padding: 0.5rem 0.8rem; border-radius: var(--radius-sm); width: 100%; max-width: 380px; font-family: var(--font-mono); font-size: 0.9rem;">
+            </div>
+
+            <div class="calc-grid">
+              <!-- Owner -->
+              <div class="calc-column">
+                <div class="calc-column-title">1. Chủ sở hữu (Owner / User)</div>
+                <label class="calc-checkbox-label">
+                  <input type="checkbox" id="cb-u-r" class="calc-cb" checked>
+                  <span>Read (Đọc - 4)</span>
+                </label>
+                <label class="calc-checkbox-label">
+                  <input type="checkbox" id="cb-u-w" class="calc-cb" checked>
+                  <span>Write (Ghi - 2)</span>
+                </label>
+                <label class="calc-checkbox-label">
+                  <input type="checkbox" id="cb-u-x" class="calc-cb" checked>
+                  <span>Execute (Thực thi - 1)</span>
+                </label>
+              </div>
+
+              <!-- Group -->
+              <div class="calc-column">
+                <div class="calc-column-title">2. Nhóm (Group)</div>
+                <label class="calc-checkbox-label">
+                  <input type="checkbox" id="cb-g-r" class="calc-cb" checked>
+                  <span>Read (Đọc - 4)</span>
+                </label>
+                <label class="calc-checkbox-label">
+                  <input type="checkbox" id="cb-g-w" class="calc-cb">
+                  <span>Write (Ghi - 2)</span>
+                </label>
+                <label class="calc-checkbox-label">
+                  <input type="checkbox" id="cb-g-x" class="calc-cb" checked>
+                  <span>Execute (Thực thi - 1)</span>
+                </label>
+              </div>
+
+              <!-- Others -->
+              <div class="calc-column">
+                <div class="calc-column-title">3. Khác (Others)</div>
+                <label class="calc-checkbox-label">
+                  <input type="checkbox" id="cb-o-r" class="calc-cb" checked>
+                  <span>Read (Đọc - 4)</span>
+                </label>
+                <label class="calc-checkbox-label">
+                  <input type="checkbox" id="cb-o-w" class="calc-cb">
+                  <span>Write (Ghi - 2)</span>
+                </label>
+                <label class="calc-checkbox-label">
+                  <input type="checkbox" id="cb-o-x" class="calc-cb" checked>
+                  <span>Execute (Thực thi - 1)</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Result Box -->
+            <div class="calc-result-box">
+              <div>
+                <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Mã số quyền (Octal)</div>
+                <div class="calc-digits" id="calc-digit-result">755</div>
+              </div>
+
+              <div>
+                <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Ký hiệu phân quyền (Symbolic)</div>
+                <div class="calc-symbolic" id="calc-symbolic-result">-rwxr-xr-x</div>
+              </div>
+
+              <div>
+                <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Lệnh thực thi tương ứng</div>
+                <div class="calc-command-output" id="calc-cmd-preview">chmod 755 /var/www/html/index.html</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tool: Terminal Playground Simulator -->
+        <article class="content-card">
+          <h3 class="card-title">
+            <span class="icon-mini">💻</span> Terminal Playground Giả Lập (Interactive Command Simulator)
+          </h3>
+          <p>
+            Nhấp vào các phím tắt lệnh bên dưới hoặc nhập trực tiếp lệnh vào dấu nhắc terminal (ấn <code>Enter</code>) để xem kết quả phản hồi thực tế trên máy chủ DevOps:
+          </p>
+
+          <div class="terminal-simulator">
+            <div class="terminal-sim-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <span class="code-title">root@vps-ptit: /var/www/my-static-web (bash)</span>
+              <span style="font-size: 0.75rem; color: #64748b; font-family: var(--font-mono);">SSH Connected</span>
+            </div>
+
+            <div class="terminal-sim-body" id="term-sim-output">
+              <div class="terminal-line" style="color: #94a3b8;">Chào mừng bạn đến với môi trường giả lập lệnh DevOps VPS PTIT!</div>
+              <div class="terminal-line" style="color: #64748b;">(Gõ lệnh hoặc bấm vào các chip bên dưới để chạy thử. Gõ 'help' để xem danh sách lệnh)</div>
+              <div class="terminal-line"><span class="terminal-prompt">root@vps-ptit:~#</span> ls -lah</div>
+              <div class="terminal-line" style="color: #cbd5e1;">total 28K<br>drwxr-xr-x 3 www-data www-data 4.0K Oct  6 09:00 .<br>drwxr-xr-x 4 root     root     4.0K Oct  6 08:30 ..<br>-rw-r--r-- 1 www-data www-data  842 Oct  6 09:05 index.html<br>-rw-r--r-- 1 www-data www-data 1.2K Oct  6 09:08 style.css<br>-rw-r--r-- 1 www-data www-data 2.1K Oct  6 09:12 app.js</div>
+            </div>
+
+            <div class="terminal-chips">
+              <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 600;">Lệnh gợi ý:</span>
+              <button class="terminal-chip" data-cmd="pwd">pwd</button>
+              <button class="terminal-chip" data-cmd="ls -lah">ls -lah</button>
+              <button class="terminal-chip" data-cmd="nginx -t">nginx -t</button>
+              <button class="terminal-chip" data-cmd="systemctl status nginx">systemctl status nginx</button>
+              <button class="terminal-chip" data-cmd="git status">git status</button>
+              <button class="terminal-chip" data-cmd="git flow init">git flow init</button>
+              <button class="terminal-chip" data-cmd="chmod 755 index.html">chmod 755 index.html</button>
+              <button class="terminal-chip" data-cmd="df -h">df -h</button>
+              <button class="terminal-chip" data-cmd="clear">clear</button>
+            </div>
+
+            <div style="padding: 0.5rem 1rem; background: #0b0f19; border-top: 1px solid rgba(255,255,255,0.05);" class="terminal-input-wrap">
+              <span class="terminal-prompt" style="margin-right: 0.4rem;">root@vps-ptit:~#</span>
+              <input type="text" id="term-sim-input" class="terminal-input-field" placeholder="Gõ lệnh tại đây rồi bấm Enter (ví dụ: nginx -t, whoami, help...)" autocomplete="off">
+            </div>
+          </div>
+        </article>
+
+        <!-- Tool: Quiz System -->
+        <article class="quiz-section">
+          <div class="quiz-header">
+            <span class="hero-tag">🎯 TEST KIẾN THỨC TỨC THÌ</span>
+            <h3 style="font-size: 1.6rem; font-weight: 800; margin-top: 0.5rem;">10 Câu Hỏi Trắc Nghiệm Cốt Lõi DevOps PTIT</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.5rem;">
+              Điểm số hiện tại của bạn: <strong style="color: var(--accent-green); font-size: 1.1rem;" id="quiz-score">0</strong> / <span id="quiz-total">10</span>
+            </p>
+          </div>
+
+          <div id="quiz-questions-container">
+            <!-- Questions rendered via app.js -->
+          </div>
+        </article>
+      </section>
+
+      <!-- Footer -->
+      <footer style="margin-top: 5rem; padding-top: 2rem; border-top: 1px solid var(--border-color); text-align: center; color: var(--text-muted); font-size: 0.875rem;">
+        <p>Đề Cương Ôn Tập DevOps Fundamental • Học Viện Công Nghệ Bưu Chính Viễn Thông (PTIT)</p>
+        <p style="margin-top: 0.35rem;">Xây dựng với chuẩn HTML5 / CSS3 Hiện Đại • Hỗ trợ học tập, tra cứu & ôn thi đạt kết quả xuất sắc</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script>
+/**
+ * ===================================================================
+ * ĐỀ CƯƠNG ÔN TẬP DEVOPS FUNDAMENTAL - PTIT
+ * Interactive Script Logic: Search, Quiz, Permission Calculator,
+ * Copy Code, Dark/Light Mode, Table of Contents Spy, Progress Tracker
+ * ===================================================================
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  initCopyButtons();
+  initReadingProgress();
+  initScrollSpy();
+  initSearch();
+  initCategoryFilter();
+  initPermissionCalculator();
+  initQuiz();
+  initProgressTracker();
+  initMobileMenu();
+  initTerminalSimulator();
+});
+
+/* ==========================================
+   1. Theme Toggle (Dark / Light Mode)
+   ========================================== */
+function initTheme() {
+  const themeToggle = document.getElementById('theme-toggle');
+  const storedTheme = localStorage.getItem('ptit_devops_theme') || 'light';
+
+  document.documentElement.setAttribute('data-theme', storedTheme);
+  updateThemeIcon(storedTheme);
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('ptit_devops_theme', newTheme);
+      updateThemeIcon(newTheme);
+      showToast(`Đã chuyển sang chế độ ${newTheme === 'dark' ? 'Tối (Dark)' : 'Sáng (Light)'}`);
+    });
+  }
+}
+
+function updateThemeIcon(theme) {
+  const icon = document.querySelector('#theme-toggle .theme-icon');
+  if (!icon) return;
+  if (theme === 'light') {
+    // Show Moon icon for light mode
+    icon.innerHTML = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
+  } else {
+    // Show Sun icon for dark mode
+    icon.innerHTML = `<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>`;
+  }
+}
+
+/* ==========================================
+   2. Copy Code to Clipboard
+   ========================================== */
+function initCopyButtons() {
+  const copyButtons = document.querySelectorAll('.btn-copy');
+  copyButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const codeBox = btn.closest('.code-box');
+      if (!codeBox) return;
+      const codeElem = codeBox.querySelector('code');
+      if (!codeElem) return;
+
+      const textToCopy = codeElem.innerText.trim();
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Đã chép!`;
+        btn.style.background = 'var(--accent-green)';
+        btn.style.color = '#fff';
+        showToast('Đã sao chép lệnh vào bộ nhớ tạm!');
+
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.style.background = '';
+          btn.style.color = '';
+        }, 2000);
+      }).catch(err => {
+        console.error('Lỗi sao chép:', err);
+        showToast('Không thể sao chép, vui lòng thử lại!', true);
+      });
+    });
+  });
+}
+
+/* ==========================================
+   3. Reading Progress Bar
+   ========================================== */
+function initReadingProgress() {
+  const progressBar = document.getElementById('reading-progress');
+  if (!progressBar) return;
+
+  window.addEventListener('scroll', () => {
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (totalHeight <= 0) return;
+    const progress = (window.scrollY / totalHeight) * 100;
+    progressBar.style.width = `${progress}%`;
+  }, { passive: true });
+}
+
+/* ==========================================
+   4. ScrollSpy (Active Table of Contents)
+   ========================================== */
+function initScrollSpy() {
+  const sections = document.querySelectorAll('.topic-section, .sub-section');
+  const navLinks = document.querySelectorAll('.sidebar-nav-link');
+
+  if (sections.length === 0 || navLinks.length === 0) return;
+
+  window.addEventListener('scroll', () => {
+    let currentId = '';
+    const scrollPos = window.scrollY + 120;
+
+    sections.forEach(sec => {
+      const top = sec.offsetTop;
+      const height = sec.offsetHeight;
+      if (scrollPos >= top && scrollPos < top + height) {
+        currentId = sec.getAttribute('id');
+      }
+    });
+
+    if (currentId) {
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') === `#${currentId}`) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }
+  }, { passive: true });
+}
+
+/* ==========================================
+   5. Live Search Filter
+   ========================================== */
+function initSearch() {
+  const searchInput = document.getElementById('global-search');
+  if (!searchInput) return;
+
+  searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.content-card, .timeline-item');
+
+    if (query === '') {
+      cards.forEach(card => card.style.display = '');
+      return;
+    }
+
+    let matchCount = 0;
+    cards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      if (text.includes(query)) {
+        card.style.display = '';
+        matchCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+}
+
+/* ==========================================
+   6. Category Filter (Tabs)
+   ========================================== */
+function initCategoryFilter() {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const sections = document.querySelectorAll('.topic-section');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.getAttribute('data-filter');
+      sections.forEach(sec => {
+        if (filter === 'all') {
+          sec.style.display = '';
+        } else if (sec.classList.contains(filter)) {
+          sec.style.display = '';
+        } else {
+          sec.style.display = 'none';
+        }
+      });
+
+      window.scrollTo({ top: 350, behavior: 'smooth' });
+    });
+  });
+}
+
+/* ==========================================
+   7. Interactive Linux Permission Calculator
+   ========================================== */
+function initPermissionCalculator() {
+  const calcCheckboxes = document.querySelectorAll('.calc-cb');
+  const digitOutput = document.getElementById('calc-digit-result');
+  const symbolicOutput = document.getElementById('calc-symbolic-result');
+  const cmdOutput = document.getElementById('calc-cmd-preview');
+  const targetFileInput = document.getElementById('calc-target-input');
+
+  if (!calcCheckboxes.length || !digitOutput) return;
+
+  function calculate() {
+    let u = 0, g = 0, o = 0;
+    let sym = '-';
+
+    // User (Owner)
+    if (document.getElementById('cb-u-r')?.checked) { u += 4; sym += 'r'; } else { sym += '-'; }
+    if (document.getElementById('cb-u-w')?.checked) { u += 2; sym += 'w'; } else { sym += '-'; }
+    if (document.getElementById('cb-u-x')?.checked) { u += 1; sym += 'x'; } else { sym += '-'; }
+
+    // Group
+    if (document.getElementById('cb-g-r')?.checked) { g += 4; sym += 'r'; } else { sym += '-'; }
+    if (document.getElementById('cb-g-w')?.checked) { g += 2; sym += 'w'; } else { sym += '-'; }
+    if (document.getElementById('cb-g-x')?.checked) { g += 1; sym += 'x'; } else { sym += '-'; }
+
+    // Others
+    if (document.getElementById('cb-o-r')?.checked) { o += 4; sym += 'r'; } else { sym += '-'; }
+    if (document.getElementById('cb-o-w')?.checked) { o += 2; sym += 'w'; } else { sym += '-'; }
+    if (document.getElementById('cb-o-x')?.checked) { o += 1; sym += 'x'; } else { sym += '-'; }
+
+    const octal = `${u}${g}${o}`;
+    digitOutput.textContent = octal;
+    symbolicOutput.textContent = sym;
+
+    const filename = targetFileInput ? (targetFileInput.value.trim() || 'myfile.txt') : 'myfile.txt';
+    if (cmdOutput) {
+      cmdOutput.textContent = `chmod ${octal} ${filename}`;
+    }
+  }
+
+  calcCheckboxes.forEach(cb => cb.addEventListener('change', calculate));
+  if (targetFileInput) {
+    targetFileInput.addEventListener('input', calculate);
+  }
+
+  calculate();
+}
+
+/* ==========================================
+   8. Interactive Quiz System
+   ========================================== */
+const quizQuestions = [
+  {
+    question: "Lệnh nào sau đây dùng để xem dung lượng các thư mục con theo định dạng con người dễ đọc (Human-readable)?",
+    options: ["df -h", "du -sh *", "ls -l", "free -m"],
+    answer: 1,
+    explanation: "'du -sh *' (Disk Usage - Summary Human-readable) tính toán và hiển thị kích thước từng tệp/thư mục. Trong khi 'df -h' hiển thị dung lượng toàn bộ ổ đĩa."
+  },
+  {
+    question: "Quyền '755' trong Linux tương ứng với chuỗi ký hiệu quyền hạn (Symbolic) nào?",
+    options: ["-rwxrwxrwx", "-rwxr-xr-x", "-rw-r--r--", "-rwxr--r--"],
+    answer: 1,
+    explanation: "7 = 4+2+1 (rwx), 5 = 4+1 (r-x), 5 = 4+1 (r-x). Vậy 755 là -rwxr-xr-x (Owner toàn quyền, Group & Others đọc và chạy)."
+  },
+  {
+    question: "Để theo dõi log Nginx theo thời gian thực (Real-time updates) khi có truy cập mới, DevOps sử dụng lệnh nào?",
+    options: ["cat /var/log/nginx/access.log", "head -n 50 /var/log/nginx/access.log", "tail -f /var/log/nginx/access.log", "nano /var/log/nginx/access.log"],
+    answer: 2,
+    explanation: "Lệnh 'tail -f' (follow) giữ mở tệp tin và liên tục in ra các dòng log mới nhất được ghi vào."
+  },
+  {
+    question: "Trong quy chuẩn Git Flow, nhánh nào được phân nhánh (branch out) từ 'main' để xử lý sự cố khẩn cấp trên Production?",
+    options: ["feature/*", "release/*", "hotfix/*", "bugfix/*"],
+    answer: 2,
+    explanation: "Nhánh 'hotfix/*' được rẽ nhánh trực tiếp từ 'main' (master) để sửa lỗi cấp bách, sau đó merge vào cả 'main' và 'develop'."
+  },
+  {
+    question: "Khi hoàn thành một nhánh 'feature' trong Git Flow, tại sao nên dùng cờ 'git merge --no-ff'?",
+    options: [
+      "Để tăng tốc độ merge nhanh hơn",
+      "Để ép buộc xóa nhánh tính năng ngay lập tức",
+      "Để luôn tạo 1 commit merge, giúp bảo toàn lịch sử và dấu vết của tính năng đó",
+      "Để không bao giờ xảy ra xung đột merge conflict"
+    ],
+    answer: 2,
+    explanation: "--no-ff (No Fast-Forward) ngăn Git gộp thẳng commit mà luôn tạo ra một Commit Merge riêng biệt, giữ nguyên cấu trúc nhánh lịch sử."
+  },
+  {
+    question: "Trong Nginx, câu lệnh nào được dùng để kiểm tra tính chính xác của cú pháp cấu hình TRƯỚC KHI nạp lại dịch vụ?",
+    options: ["nginx -v", "nginx -t", "systemctl status nginx", "service nginx restart"],
+    answer: 1,
+    explanation: "'nginx -t' (Test configuration) kiểm tra toàn bộ file config xem có lỗi cú pháp hoặc sai đường dẫn không. Đây là nguyên tắc sống còn tránh làm sập server."
+  },
+  {
+    question: "Khác biệt cơ bản giữa 'systemctl restart nginx' và 'systemctl reload nginx' là gì?",
+    options: [
+      "restart tắt và mở lại dịch vụ gây gián đoạn ngắn (downtime), reload nạp lại file cấu hình mượt mà không ngắt kết nối (Zero Downtime)",
+      "reload tắt hẳn nginx, restart chỉ khởi động lại worker",
+      "Hai lệnh này hoàn toàn giống hệt nhau về cơ chế",
+      "reload chỉ kiểm tra cú pháp, không áp dụng thay đổi"
+    ],
+    answer: 0,
+    explanation: "'reload' gửi tín hiệu SIGHUP, Nginx nạp config mới với worker processes mới mà không làm rớt các kết nối của người dùng đang truy cập."
+  },
+  {
+    question: "Trong file cấu hình Nginx, directive nào quy định thư mục gốc chứa các file mã nguồn tĩnh (index.html, css, js)?",
+    options: ["server_name", "location", "root", "listen"],
+    answer: 2,
+    explanation: "'root' chỉ định đường dẫn tuyệt đối đến thư mục chứa mã nguồn web trên VPS (ví dụ: root /var/www/my-app;)."
+  },
+  {
+    question: "Để kích hoạt một Virtual Host Nginx từ thư mục 'sites-available' sang 'sites-enabled', ta dùng câu lệnh nào?",
+    options: [
+      "cp /etc/nginx/sites-available/app.conf /etc/nginx/sites-enabled/",
+      "ln -s /etc/nginx/sites-available/app.conf /etc/nginx/sites-enabled/",
+      "mv /etc/nginx/sites-available/app.conf /etc/nginx/sites-enabled/",
+      "touch /etc/nginx/sites-enabled/app.conf"
+    ],
+    answer: 1,
+    explanation: "Dùng liên kết mềm (Symbolic Link 'ln -s') giúp đồng bộ tức thời khi sửa file tại sites-available mà không cần phải copy lại."
+  },
+  {
+    question: "Lệnh nào sau đây gán quyền sở hữu thư mục web '/var/www/my-site' cho người dùng hệ thống chạy Nginx (thường là www-data)?",
+    options: [
+      "chmod 755 /var/www/my-site",
+      "chown -R www-data:www-data /var/www/my-site",
+      "usermod -aG root www-data",
+      "chgrp nginx /var/www/my-site"
+    ],
+    answer: 1,
+    explanation: "'chown -R www-data:www-data' đổi cả chủ sở hữu (Owner) và nhóm (Group) đệ quy cho toàn bộ thư mục và tệp tin bên trong."
+  }
+];
+
+function initQuiz() {
+  const container = document.getElementById('quiz-questions-container');
+  const scoreElem = document.getElementById('quiz-score');
+  const totalElem = document.getElementById('quiz-total');
+
+  if (!container) return;
+
+  totalElem.textContent = quizQuestions.length;
+  let score = 0;
+  let answeredCount = 0;
+
+  quizQuestions.forEach((q, index) => {
+    const card = document.createElement('div');
+    card.className = 'quiz-question-card';
+    card.id = `quiz-q-${index}`;
+
+    let optionsHtml = '';
+    q.options.forEach((opt, optIndex) => {
+      optionsHtml += `
+        <button class="quiz-option-btn" data-q="${index}" data-opt="${optIndex}">
+          <span class="badge-tag">${String.fromCharCode(65 + optIndex)}</span>
+          <span>${escapeHtml(opt)}</span>
+        </button>
+      `;
+    });
+
+    card.innerHTML = `
+      <div class="quiz-q-num">Câu hỏi ${index + 1} / ${quizQuestions.length}</div>
+      <div class="quiz-q-text">${escapeHtml(q.question)}</div>
+      <div class="quiz-options">${optionsHtml}</div>
+      <div class="quiz-explanation" id="quiz-exp-${index}">
+        <strong>💡 Giải thích:</strong> ${escapeHtml(q.explanation)}
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+
+  container.addEventListener('click', (e) => {
+    const btn = e.target.closest('.quiz-option-btn');
+    if (!btn) return;
+
+    const qIndex = parseInt(btn.getAttribute('data-q'), 10);
+    const optIndex = parseInt(btn.getAttribute('data-opt'), 10);
+    const qData = quizQuestions[qIndex];
+    const parentCard = document.getElementById(`quiz-q-${qIndex}`);
+    const explanation = document.getElementById(`quiz-exp-${qIndex}`);
+
+    if (parentCard.classList.contains('answered')) return;
+    parentCard.classList.add('answered');
+
+    const allBtns = parentCard.querySelectorAll('.quiz-option-btn');
+    allBtns.forEach(b => b.style.pointerEvents = 'none');
+
+    if (optIndex === qData.answer) {
+      btn.classList.add('correct');
+      score++;
+      showToast('🎉 Chính xác!');
+    } else {
+      btn.classList.add('wrong');
+      allBtns[qData.answer].classList.add('correct');
+      showToast('❌ Chưa đúng, xem giải thích bên dưới', true);
+    }
+
+    explanation.classList.add('show');
+    answeredCount++;
+    scoreElem.textContent = score;
+
+    if (answeredCount === quizQuestions.length) {
+      const percentage = Math.round((score / quizQuestions.length) * 100);
+      showToast(`🏆 Hoàn thành trắc nghiệm! Điểm số: ${score}/${quizQuestions.length} (${percentage}%)`);
+    }
+  });
+}
+
+/* ==========================================
+   9. Learning Progress Tracker (Checklist)
+   ========================================== */
+function initProgressTracker() {
+  const checkboxes = document.querySelectorAll('.topic-check, .check-badge input');
+  const countDisplay = document.getElementById('completed-count');
+  const percentDisplay = document.getElementById('progress-percent');
+  const progressBarFill = document.getElementById('sidebar-progress-fill');
+
+  if (!checkboxes.length) return;
+
+  const saved = JSON.parse(localStorage.getItem('ptit_devops_progress') || '{}');
+
+  checkboxes.forEach((cb, idx) => {
+    const topicId = cb.getAttribute('data-topic') || `topic-auto-${idx}`;
+    if (saved[topicId]) {
+      cb.checked = true;
+      cb.closest('.check-badge')?.classList.add('checked');
+    }
+
+    cb.addEventListener('change', () => {
+      saved[topicId] = cb.checked;
+      if (cb.checked) {
+        cb.closest('.check-badge')?.classList.add('checked');
+      } else {
+        cb.closest('.check-badge')?.classList.remove('checked');
+      }
+      localStorage.setItem('ptit_devops_progress', JSON.stringify(saved));
+      updateProgress();
+      if (cb.checked) {
+        showToast('🎯 Tuyệt vời! Bạn đã hoàn thành một mục kiến thức!');
+      }
+    });
+  });
+
+  function updateProgress() {
+    let completed = 0;
+    checkboxes.forEach(cb => {
+      if (cb.checked) completed++;
+    });
+
+    const total = checkboxes.length;
+    const percent = Math.round((completed / total) * 100);
+
+    if (countDisplay) countDisplay.textContent = `${completed}/${total}`;
+    if (percentDisplay) percentDisplay.textContent = `${percent}%`;
+    if (progressBarFill) progressBarFill.style.width = `${percent}%`;
+  }
+
+  updateProgress();
+}
+
+/* ==========================================
+   10. Terminal Playground Simulator
+   ========================================== */
+function initTerminalSimulator() {
+  const terminalBody = document.getElementById('term-sim-output');
+  const terminalInput = document.getElementById('term-sim-input');
+  const chips = document.querySelectorAll('.terminal-chip');
+
+  if (!terminalBody || !terminalInput) return;
+
+  function runSimCommand(cmd) {
+    const cleanCmd = cmd.trim();
+    if (!cleanCmd) return;
+
+    // Append prompt line
+    const promptLine = document.createElement('div');
+    promptLine.className = 'terminal-line';
+    promptLine.innerHTML = `<span class="terminal-prompt">root@vps-ptit:~#</span> ${escapeHtml(cleanCmd)}`;
+    terminalBody.appendChild(promptLine);
+
+    const lower = cleanCmd.toLowerCase();
+    let responseHtml = '';
+
+    if (lower === 'clear') {
+      terminalBody.innerHTML = '';
+      terminalInput.value = '';
+      return;
+    } else if (lower === 'help') {
+      responseHtml = `<div style="color: #93c5fd;">Các lệnh hỗ trợ mô phỏng:<br>
+      • <strong>pwd</strong> - In thư mục hiện tại<br>
+      • <strong>ls -la</strong> - Liệt kê file và quyền truy cập<br>
+      • <strong>nginx -t</strong> - Kiểm tra cú pháp cấu hình Nginx<br>
+      • <strong>systemctl status nginx</strong> - Trạng thái dịch vụ Nginx<br>
+      • <strong>git status</strong> - Trạng thái kho Git và nhánh<br>
+      • <strong>git flow init</strong> - Khởi tạo mô hình Git Flow<br>
+      • <strong>chmod 755 index.html</strong> - Phân quyền tệp tin<br>
+      • <strong>df -h</strong> - Dung lượng ổ đĩa VPS<br>
+      • <strong>clear</strong> - Xóa sạch màn hình terminal</div>`;
+    } else if (lower === 'pwd') {
+      responseHtml = `<div style="color: #34d399;">/var/www/my-static-web</div>`;
+    } else if (lower.startsWith('ls')) {
+      responseHtml = `<div style="color: #cbd5e1;">total 28K<br>
+drwxr-xr-x 3 www-data www-data 4.0K Oct  6 09:00 .<br>
+drwxr-xr-x 4 root     root     4.0K Oct  6 08:30 ..<br>
+-rw-r--r-- 1 www-data www-data  842 Oct  6 09:05 index.html<br>
+-rw-r--r-- 1 www-data www-data 1.2K Oct  6 09:08 style.css<br>
+-rw-r--r-- 1 www-data www-data 2.1K Oct  6 09:12 app.js<br>
+drwxr-xr-x 2 www-data www-data 4.0K Oct  6 09:02 images<br>
+-rw------- 1 www-data www-data  120 Oct  6 09:15 .env</div>`;
+    } else if (lower === 'nginx -t') {
+      responseHtml = `<div style="color: #34d399;">nginx: the configuration file /etc/nginx/nginx.conf syntax is ok<br>
+nginx: configuration file /etc/nginx/nginx.conf test is successful</div>`;
+    } else if (lower.includes('status nginx')) {
+      responseHtml = `<div style="color: #cbd5e1;">● nginx.service - A high performance web server and a reverse proxy server<br>
+&nbsp;&nbsp;Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)<br>
+&nbsp;&nbsp;Active: <span style="color: #34d399; font-weight: bold;">active (running)</span> since Sun 2026-10-06 08:00:15 UTC<br>
+&nbsp;&nbsp;Main PID: 1248 (nginx)<br>
+&nbsp;&nbsp;Tasks: 3 (limit: 2362)<br>
+&nbsp;&nbsp;Memory: 6.8M</div>`;
+    } else if (lower.includes('reload nginx')) {
+      responseHtml = `<div style="color: #34d399;">[OK] Nginx reloaded gracefully without downtime.</div>`;
+    } else if (lower === 'git status') {
+      responseHtml = `<div style="color: #cbd5e1;">On branch <span style="color: #f59e0b; font-weight: bold;">develop</span><br>
+Your branch is up to date with 'origin/develop'.<br>
+<br>
+nothing to commit, working tree clean</div>`;
+    } else if (lower.startsWith('git flow init')) {
+      responseHtml = `<div style="color: #cbd5e1;">Initialized empty Git repository in /var/www/my-static-web/.git/<br>
+Branch name for production releases: [<span style="color: #60a5fa;">main</span>]<br>
+Branch name for "next release" development: [<span style="color: #f59e0b;">develop</span>]<br>
+Feature branches? [feature/]<br>
+Release branches? [release/]<br>
+Hotfix branches? [hotfix/]<br>
+<span style="color: #34d399;">Git Flow setup completed successfully!</span></div>`;
+    } else if (lower.startsWith('chmod')) {
+      responseHtml = `<div style="color: #34d399;">Mode changed successfully. (Quyền hạn mới đã được áp dụng)</div>`;
+    } else if (lower.startsWith('chown')) {
+      responseHtml = `<div style="color: #34d399;">Ownership updated: www-data:www-data</div>`;
+    } else if (lower === 'df -h') {
+      responseHtml = `<div style="color: #cbd5e1;">Filesystem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size&nbsp;&nbsp;Used&nbsp;Avail&nbsp;Use%&nbsp;Mounted on<br>
+/dev/vda1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;40G&nbsp;&nbsp;8.4G&nbsp;&nbsp;&nbsp;30G&nbsp;&nbsp;22%&nbsp;/<br>
+tmpfs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.9G&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;1.9G&nbsp;&nbsp;&nbsp;0%&nbsp;/run/user/0</div>`;
+    } else if (lower === 'whoami') {
+      responseHtml = `<div style="color: #f87171;">root</div>`;
+    } else {
+      responseHtml = `<div style="color: #f87171;">bash: ${escapeHtml(cleanCmd)}: command not found (Gõ 'help' để xem danh sách lệnh)</div>`;
+    }
+
+    const outputElem = document.createElement('div');
+    outputElem.className = 'terminal-line';
+    outputElem.innerHTML = responseHtml;
+    terminalBody.appendChild(outputElem);
+
+    terminalBody.scrollTop = terminalBody.scrollHeight;
+    terminalInput.value = '';
+  }
+
+  terminalInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      runSimCommand(terminalInput.value);
+    }
+  });
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const cmd = chip.getAttribute('data-cmd');
+      terminalInput.value = cmd;
+      runSimCommand(cmd);
+    });
+  });
+}
+
+/* ==========================================
+   11. Mobile Menu
+   ========================================== */
+function initMobileMenu() {
+  const toggleBtn = document.querySelector('.mobile-nav-toggle');
+  const sidebar = document.querySelector('.app-sidebar');
+
+  if (toggleBtn && sidebar) {
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+    });
+
+    // Close on link click
+    sidebar.querySelectorAll('.sidebar-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+      });
+    });
+  }
+}
+
+/* ==========================================
+   Helper: Toast Notification
+   ========================================== */
+function showToast(message, isError = false) {
+  let container = document.querySelector('.toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.className = 'toast-container';
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  if (isError) {
+    toast.style.borderColor = 'var(--accent-red)';
+    toast.style.color = '#fca5a5';
+  }
+
+  toast.innerHTML = `
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      ${isError 
+        ? '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>'
+        : '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>'}
+    </svg>
+    <span>${escapeHtml(message)}</span>
+  `;
+
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.style.animation = 'toastOut 0.3s forwards';
+    setTimeout(() => toast.remove(), 300);
+  }, 2600);
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+}
+
+</script>
+</body>
+</html>
