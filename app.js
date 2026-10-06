@@ -487,8 +487,10 @@ function initTerminalSimulator() {
       • <strong>ls -la</strong> - Liệt kê file và quyền truy cập<br>
       • <strong>nginx -t</strong> - Kiểm tra cú pháp cấu hình Nginx<br>
       • <strong>systemctl status nginx</strong> - Trạng thái dịch vụ Nginx<br>
+      • <strong>ufw status</strong> - Trạng thái tường lửa UFW & các port mở<br>
       • <strong>git status</strong> - Trạng thái kho Git và nhánh<br>
       • <strong>git flow init</strong> - Khởi tạo mô hình Git Flow<br>
+      • <strong>git merge --abort</strong> - Hủy bỏ quá trình merge đang bị conflict<br>
       • <strong>chmod 755 index.html</strong> - Phân quyền tệp tin<br>
       • <strong>df -h</strong> - Dung lượng ổ đĩa VPS<br>
       • <strong>clear</strong> - Xóa sạch màn hình terminal</div>`;
@@ -536,7 +538,18 @@ Hotfix branches? [hotfix/]<br>
       responseHtml = `<div style="color: #cbd5e1;">Filesystem&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size&nbsp;&nbsp;Used&nbsp;Avail&nbsp;Use%&nbsp;Mounted on<br>
 /dev/vda1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;40G&nbsp;&nbsp;8.4G&nbsp;&nbsp;&nbsp;30G&nbsp;&nbsp;22%&nbsp;/<br>
 tmpfs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.9G&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;1.9G&nbsp;&nbsp;&nbsp;0%&nbsp;/run/user/0</div>`;
-    } else if (lower === 'whoami') {
+    } else if (lower.startsWith('ufw status')) {
+      responseHtml = `<div style="color: #cbd5e1;">Status: <span style="color: #34d399; font-weight: bold;">active</span><br>
+<br>
+To&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From<br>
+--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;------&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----<br>
+22/tcp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ALLOW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Anywhere<br>
+Nginx Full&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ALLOW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Anywhere<br>
+22/tcp (v6)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ALLOW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Anywhere (v6)<br>
+Nginx Full (v6)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ALLOW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Anywhere (v6)</div>`;
+    } else if (lower.startsWith('git merge --abort')) {
+      responseHtml = `<div style="color: #34d399;">Merge aborted. Repository restored to pre-merge state. (Đã hủy merge an toàn)</div>`;
+    } else if (lower.startsWith('whoami')) {
       responseHtml = `<div style="color: #f87171;">root</div>`;
     } else {
       responseHtml = `<div style="color: #f87171;">bash: ${escapeHtml(cleanCmd)}: command not found (Gõ 'help' để xem danh sách lệnh)</div>`;

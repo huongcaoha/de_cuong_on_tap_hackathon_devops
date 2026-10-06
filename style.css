@@ -740,6 +740,7 @@ body {
 .topic-section.linux .section-header::after { background: var(--accent-yellow); }
 .topic-section.git .section-header::after { background: var(--accent-pink); }
 .topic-section.nginx .section-header::after { background: var(--accent-green); }
+.topic-section.ufw .section-header::after { background: var(--accent-cyan); }
 
 .section-title-wrap {
   display: flex;
@@ -761,6 +762,7 @@ body {
 .section-badge.linux { background: var(--gradient-linux); color: #fff; }
 .section-badge.git { background: var(--gradient-git); color: #fff; }
 .section-badge.nginx { background: var(--gradient-nginx); color: #fff; }
+.section-badge.ufw { background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%); color: #fff; }
 
 .section-title {
   font-size: 1.85rem;

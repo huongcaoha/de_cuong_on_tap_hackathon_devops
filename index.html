@@ -162,7 +162,12 @@
         </li>
         <li class="sidebar-nav-item">
           <a href="#git-bangtracuu" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
-            <span>2.5 Bảng tra cứu & Lỗi hay gặp</span>
+            <span>2.5 Bảng tra cứu & Quy tắc vàng</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#git-conflict" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>2.6 Hướng dẫn xử lý Merge Conflict</span>
           </a>
         </li>
 
@@ -195,19 +200,57 @@
         </li>
         <li class="sidebar-nav-item">
           <a href="#nginx-deploy" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
-            <span>3.5 9 Bước Deploy HTML từ A-Z</span>
+            <span>3.5 Deploy File HTML Có Sẵn Trên VPS</span>
           </a>
         </li>
         <li class="sidebar-nav-item">
           <a href="#nginx-troubleshoot" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
-            <span>3.6 Tối ưu & Khắc phục lỗi 403, 404</span>
+            <span>3.6 Khắc phục lỗi 403, 404, 502</span>
           </a>
         </li>
 
         <li class="sidebar-nav-item" style="margin-top: 0.75rem;">
-          <a href="#phan-4-congcu" class="sidebar-nav-link">
+          <a href="#phan-4-ufw" class="sidebar-nav-link">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <span>Phần 4: Tường Lửa UFW (Firewall)</span>
+            <span class="sidebar-badge" style="background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan);">UFW</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#ufw-khainiem" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>4.1 Khái niệm & Nguyên lý UFW</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#ufw-trangthai" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>4.2 Lệnh trạng thái & Bật/Tắt</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#ufw-ssh" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>4.3 Mở cổng SSH 22 (Quy tắc sống còn)</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#ufw-webports" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>4.4 Mở cổng 80, 443 & App profile</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#ufw-ipfilter" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>4.5 Cho phép / Chặn địa chỉ IP</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#ufw-rules" class="sidebar-nav-link" style="padding-left: 2rem; font-size: 0.8rem;">
+            <span>4.6 Quản lý & Xóa quy tắc</span>
+          </a>
+        </li>
+
+        <li class="sidebar-nav-item" style="margin-top: 0.75rem;">
+          <a href="#phan-5-congcu" class="sidebar-nav-link">
             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
-            <span>Phần 4: Công Cụ & Trắc Nghiệm</span>
+            <span>Phần 5: Công Cụ & Trắc Nghiệm</span>
             <span class="sidebar-badge">Test</span>
           </a>
         </li>
@@ -223,7 +266,7 @@
         </div>
         <h1 class="hero-title">Đề Cương Ôn Tập DevOps Fundamental</h1>
         <p class="hero-desc">
-          Tài liệu tổng hợp thực chiến chuẩn hóa, giải thích bản chất dễ hiểu từng câu lệnh, kèm ví dụ thực tế trên môi trường Linux VPS, mô hình phân nhánh Git Flow và quy trình triển khai website HTML chuyên nghiệp với Nginx Web Server.
+          Tài liệu tổng hợp thực chiến chuẩn hóa, giải thích bản chất dễ hiểu từng câu lệnh, kèm ví dụ thực tế trên môi trường Linux VPS, mô hình phân nhánh Git Flow kèm xử lý xung đột Merge Conflict, triển khai file HTML có sẵn với Nginx và thiết lập Tường lửa UFW an ninh mạng.
         </p>
 
         <div class="hero-stats">
@@ -242,8 +285,8 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M18 9a9 9 0 0 1-9 9"></path></svg>
             </div>
             <div>
-              <div class="stat-number">5 Nhánh</div>
-              <div class="stat-label">Quy chuẩn Git Flow</div>
+              <div class="stat-number">Git Flow</div>
+              <div class="stat-label">5 Nhánh & Xử lý Conflict</div>
             </div>
           </div>
 
@@ -252,8 +295,18 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
             </div>
             <div>
-              <div class="stat-number">9 Bước</div>
-              <div class="stat-label">Deploy Nginx Chuẩn A-Z</div>
+              <div class="stat-number">Nginx Deploy</div>
+              <div class="stat-label">File HTML có sẵn trên VPS</div>
+            </div>
+          </div>
+
+          <div class="hero-stat-card">
+            <div class="stat-icon" style="background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <div>
+              <div class="stat-number">UFW Firewall</div>
+              <div class="stat-label">Tường lửa an ninh VPS</div>
             </div>
           </div>
         </div>
@@ -271,15 +324,19 @@
         </button>
         <button class="filter-btn" data-filter="git">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M18 9a9 9 0 0 1-9 9"></path></svg>
-          2. Git Flow Thực Chiến
+          2. Git Flow & Conflict
         </button>
         <button class="filter-btn" data-filter="nginx">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 8 8 12 12 16 16 12 12 8"></polygon></svg>
-          3. Nginx & Deploy HTML
+          3. Nginx Deploy HTML
+        </button>
+        <button class="filter-btn" data-filter="ufw">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          4. Tường Lửa UFW VPS
         </button>
         <button class="filter-btn" data-filter="tools">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
-          4. Công cụ & Trắc nghiệm
+          5. Công cụ & Trắc nghiệm
         </button>
       </div>
 
@@ -1096,6 +1153,143 @@ Loại tệp  Owner (Chủ)    Group (Nhóm)   Others (Người khác)
             </div>
           </div>
         </article>
+
+        <!-- 2.6 Xử lý Merge Conflict -->
+        <article class="content-card" id="git-conflict">
+          <div class="card-header-flex">
+            <h3 class="card-title">
+              <span class="icon-mini">⚔️</span> 2.6 Hướng Dẫn Xử Lý Xung Đột (Merge Conflict) Thực Chiến
+            </h3>
+            <label class="check-badge">
+              <input type="checkbox" data-topic="git-conflict"> Đã hiểu
+            </label>
+          </div>
+
+          <p>
+            <strong>Xung đột mã nguồn (Merge Conflict)</strong> xảy ra khi <strong>hai nhánh cùng thay đổi trên cùng một dòng</strong> trong cùng một tệp tin (hoặc một bên sửa nội dung, một bên xóa tệp). Khi merge vào nhau (ví dụ: merge <code>feature/login</code> vào <code>develop</code> hoặc merge <code>hotfix</code> vào <code>main</code>), Git không thể tự đoán code của ai là chính xác nên sẽ dừng tiến trình và yêu cầu bạn can thiệp thủ công.
+          </p>
+
+          <h4 style="margin: 1.25rem 0 0.5rem 0; font-size: 1rem; color: var(--text-primary);">
+            1. Dấu hiệu nhận biết khi bị Merge Conflict:
+          </h4>
+          <p>Khi chạy lệnh merge, terminal sẽ thông báo lỗi và trạng thái nhánh lập tức chuyển sang chế độ <code>MERGING</code>:</p>
+          <div class="code-box">
+            <div class="code-header">
+              <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>
+              <span class="code-title">Terminal: Thông báo xung đột từ Git</span>
+              <button class="btn-copy">Sao chép</button>
+            </div>
+            <div class="code-body">
+<code><span class="c-cmd">git</span> <span class="c-cmd">checkout</span> <span class="c-path">develop</span>
+<span class="c-cmd">git</span> <span class="c-cmd">merge</span> <span class="c-flag">--no-ff</span> <span class="c-path">feature/header</span>
+
+<span class="c-cmt"># Git thông báo lỗi xung đột:</span>
+<span class="c-str">Auto-merging index.html</span>
+<span class="c-num">CONFLICT (content): Merge conflict in index.html</span>
+<span class="c-flag">Automatic merge failed; fix conflicts and then commit the result.</span>
+
+<span class="c-cmt"># Trạng thái dấu nhắc terminal sẽ đổi thành: (develop|MERGING)</span></code>
+            </div>
+          </div>
+
+          <h4 style="margin: 1.25rem 0 0.5rem 0; font-size: 1rem; color: var(--text-primary);">
+            2. Cấu trúc đánh dấu Conflict Marker chuẩn trong file code:
+          </h4>
+          <p>Mở file bị xung đột (ví dụ: <code>nano index.html</code>), bạn sẽ thấy Git tự động đánh dấu 3 vùng bằng các ký hiệu đặc biệt:</p>
+          <div class="code-box">
+            <div class="code-header">
+              <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>
+              <span class="code-title">Bên trong file index.html bị Conflict</span>
+              <button class="btn-copy">Sao chép</button>
+            </div>
+            <div class="code-body">
+<code><span class="c-num">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span>
+<span class="c-path">&lt;title&gt;Hệ Thống Đào Tạo Công Nghệ PTIT&lt;/title&gt;</span>
+<span class="c-cmt"># (Đoạn mã hiện tại đang nằm trên nhánh develop mà bạn đang đứng)</span>
+<span class="c-kw">=======</span>
+<span class="c-cmd">&lt;title&gt;Học Viện Công Nghệ Bưu Chính Viễn Thông - DevOps&lt;/title&gt;</span>
+<span class="c-cmt"># (Đoạn mã mới từ nhánh feature/header đang được kéo vào merge)</span>
+<span class="c-num">&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/header</span></code>
+            </div>
+          </div>
+
+          <h4 style="margin: 1.25rem 0 0.5rem 0; font-size: 1rem; color: var(--text-primary);">
+            3. Quy trình 5 Bước Giải Quyết Conflict Chuẩn DevOps:
+          </h4>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <h5 class="timeline-title">Bước 1: Xác định danh sách các file đang bị xung đột</h5>
+              <p class="timeline-desc">Chạy <code>git status</code> để kiểm tra danh sách tệp chưa được hợp nhất (Unmerged paths):</p>
+              <div class="code-box">
+                <div class="code-header"><span class="code-title">Terminal</span><button class="btn-copy">Sao chép</button></div>
+                <div class="code-body">
+<code><span class="c-cmd">git</span> <span class="c-cmd">status</span>
+<span class="c-cmt"># Kết quả hiển thị:</span>
+<span class="c-cmt"># Unmerged paths:</span>
+<span class="c-cmt">#   both modified:   index.html</span></code>
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <h5 class="timeline-title">Bước 2: Mở file và lựa chọn phương án giải quyết</h5>
+              <p class="timeline-desc">
+                Mở tệp tin bằng <code>nano index.html</code>, <code>vim index.html</code> hoặc VS Code. Trao đổi với người viết đoạn code còn lại và đưa ra quyết định:
+                <br>• <strong>Giữ lại code HEAD:</strong> Lấy code của nhánh hiện tại.
+                <br>• <strong>Lấy code Feature:</strong> Ghi đè bằng code mới của tính năng.
+                <br>• <strong>Kết hợp cả 2:</strong> Viết lại một đoạn mã thống nhất giữ được logic của cả 2 bên.
+              </p>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <h5 class="timeline-title">Bước 3: Xóa bỏ hoàn toàn các ký hiệu đánh dấu Conflict</h5>
+              <p class="timeline-desc">
+                <strong>QUY TẮC BẮT BUỘC:</strong> Phải xóa sạch các dòng <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code>, <code>=======</code>, và <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch_name</code>. Chỉ để lại mã nguồn HTML/CSS hoàn chỉnh, sau đó lưu tệp lại.
+              </p>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <h5 class="timeline-title">Bước 4: Đánh dấu tệp tin đã được giải quyết (Mark as Resolved)</h5>
+              <p class="timeline-desc">Dùng lệnh <code>git add</code> để thông báo với Git rằng tệp đã được sửa xong:</p>
+              <div class="code-box">
+                <div class="code-header"><span class="code-title">Terminal</span><button class="btn-copy">Sao chép</button></div>
+                <div class="code-body">
+<code><span class="c-cmd">git</span> <span class="c-cmd">add</span> <span class="c-path">index.html</span></code>
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item success">
+              <div class="timeline-dot"></div>
+              <h5 class="timeline-title">Bước 5: Commit hoàn tất tiến trình Merge</h5>
+              <p class="timeline-desc">Tạo một commit merge để kết thúc quá trình giải quyết xung đột:</p>
+              <div class="code-box">
+                <div class="code-header"><span class="code-title">Terminal</span><button class="btn-copy">Sao chép</button></div>
+                <div class="code-body">
+<code><span class="c-cmd">git</span> <span class="c-cmd">commit</span> <span class="c-flag">-m</span> <span class="c-str">"merge: giải quyết xung đột index.html giữa develop và feature/header"</span>
+<span class="c-cmd">git</span> <span class="c-cmd">push</span> <span class="c-str">origin develop</span>
+
+<span class="c-cmt"># Trạng thái terminal trở lại bình thường (develop) sạch sẽ!</span></code>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout callout-tip">
+            <span class="callout-icon">💡</span>
+            <div>
+              <strong>LỆNH "CỨU CÁNH" KHI BỊ RỐI: <code>git merge --abort</code></strong><br>
+              Nếu trong lúc xử lý xung đột bạn thấy quá phức tạp, chưa chắc chắn hoặc sợ làm mất mã nguồn quan trọng, hãy gõ ngay lệnh:
+              <br><code style="font-size: 0.95rem; font-weight: bold; color: var(--accent-blue);">git merge --abort</code><br>
+              Lệnh này sẽ lập tức dừng merge và <strong>khôi phục kho mã nguồn quay về nguyên vẹn 100%</strong> như thời điểm trước khi bạn bấm lệnh merge, hoàn toàn không gây mất mát dữ liệu!
+            </div>
+          </div>
+        </article>
       </section>
 
       <!-- ==============================================================
@@ -1370,24 +1564,33 @@ Loại tệp  Owner (Chủ)    Group (Nhóm)   Others (Người khác)
           </div>
         </article>
 
-        <!-- 3.5 9 Bước Deploy HTML từ A-Z -->
+        <!-- 3.5 Deploy file HTML có sẵn trên VPS -->
         <article class="content-card" id="nginx-deploy">
-          <h3 class="card-title">
-            <span class="icon-mini">🚀</span> 3.5 Quy Trình 9 Bước Deploy Ứng Dụng HTML Lên Nginx Từ A Đến Z
-          </h3>
+          <div class="card-header-flex">
+            <h3 class="card-title">
+              <span class="icon-mini">🚀</span> 3.5 Quy Trình 8 Bước Deploy File HTML Có Sẵn Trên VPS Lên Nginx Chuẩn A-Z
+            </h3>
+            <label class="check-badge">
+              <input type="checkbox" data-topic="nginx-deploy"> Đã hiểu
+            </label>
+          </div>
 
-          <p>Quy trình thực tế từng bước một được tóm lược chuẩn xác để áp dụng ngay trong đồ án và bài thi:</p>
+          <p>
+            Trong thực tế quản trị DevOps hoặc làm bài thi môn học, bạn thường đã có sẵn thư mục chứa các file mã nguồn tĩnh (ví dụ: <code>index.html</code>, <code>style.css</code>) nằm sẵn trong thư mục người dùng trên máy chủ VPS (ví dụ tại <code>~/my-website/</code> hoặc vừa tạo trực tiếp bằng terminal). Dưới đây là quy trình từng bước đưa file có sẵn này lên chạy chính thức trên Nginx Web Server:
+          </p>
 
           <div class="timeline">
             <!-- Step 1 -->
             <div class="timeline-item">
               <div class="timeline-dot"></div>
-              <h4 class="timeline-title">Bước 1: Cài đặt Nginx trên VPS</h4>
-              <p class="timeline-desc">Kết nối SSH vào VPS bằng PuTTY/Terminal: <code>ssh root@your_vps_ip</code> và cài đặt Nginx.</p>
+              <h4 class="timeline-title">Bước 1: Cài đặt và kích hoạt dịch vụ Nginx trên VPS</h4>
+              <p class="timeline-desc">Kết nối SSH vào VPS bằng PuTTY/Terminal: <code>ssh user@your_vps_ip</code> và cài đặt Nginx:</p>
               <div class="code-box">
                 <div class="code-header"><span class="code-title">Bash</span><button class="btn-copy">Sao chép</button></div>
                 <div class="code-body">
-<code><span class="c-cmd">sudo apt</span> <span class="c-cmd">update</span> <span class="c-kw">&amp;&amp;</span> <span class="c-cmd">sudo apt</span> <span class="c-cmd">install</span> <span class="c-flag">-y</span> <span class="c-str">nginx</span></code>
+<code><span class="c-cmd">sudo apt</span> <span class="c-cmd">update</span> <span class="c-kw">&amp;&amp;</span> <span class="c-cmd">sudo apt</span> <span class="c-cmd">install</span> <span class="c-flag">-y</span> <span class="c-str">nginx</span>
+<span class="c-cmd">sudo systemctl</span> <span class="c-cmd">enable</span> <span class="c-str">nginx</span>
+<span class="c-cmd">sudo systemctl</span> <span class="c-cmd">status</span> <span class="c-str">nginx</span></code>
                 </div>
               </div>
             </div>
@@ -1395,12 +1598,12 @@ Loại tệp  Owner (Chủ)    Group (Nhóm)   Others (Người khác)
             <!-- Step 2 -->
             <div class="timeline-item">
               <div class="timeline-dot"></div>
-              <h4 class="timeline-title">Bước 2: Tạo thư mục chứa mã nguồn website</h4>
-              <p class="timeline-desc">Tạo thư mục dành riêng cho dự án tại <code>/var/www/</code>.</p>
+              <h4 class="timeline-title">Bước 2: Tạo thư mục Web Root trên Nginx</h4>
+              <p class="timeline-desc">Tạo thư mục dành riêng để chứa mã nguồn website tĩnh tại phân vùng chuẩn <code>/var/www/</code>:</p>
               <div class="code-box">
                 <div class="code-header"><span class="code-title">Bash</span><button class="btn-copy">Sao chép</button></div>
                 <div class="code-body">
-<code><span class="c-cmd">sudo mkdir</span> <span class="c-flag">-p</span> <span class="c-path">/var/www/my-portfolio</span></code>
+<code><span class="c-cmd">sudo mkdir</span> <span class="c-flag">-p</span> <span class="c-path">/var/www/my-static-web</span></code>
                 </div>
               </div>
             </div>
@@ -1408,19 +1611,39 @@ Loại tệp  Owner (Chủ)    Group (Nhóm)   Others (Người khác)
             <!-- Step 3 -->
             <div class="timeline-item">
               <div class="timeline-dot"></div>
-              <h4 class="timeline-title">Bước 3: Đưa mã nguồn HTML/CSS/JS lên VPS</h4>
-              <p class="timeline-desc">Có thể chọn 1 trong 3 cách tùy vào công cụ bạn có:</p>
+              <h4 class="timeline-title">Bước 3: Đưa file HTML có sẵn trên VPS vào thư mục Web Root</h4>
+              <p class="timeline-desc">
+                Tùy thuộc vào việc file HTML của bạn đang ở đâu trên VPS, chọn 1 trong 2 cách sau:
+              </p>
               <div class="code-box">
-                <div class="code-header"><span class="code-title">Bash: Các cách upload code</span><button class="btn-copy">Sao chép</button></div>
+                <div class="code-header"><span class="code-title">Bash: Đưa file HTML có sẵn vào thư mục web</span><button class="btn-copy">Sao chép</button></div>
                 <div class="code-body">
-<code><span class="c-cmt"># Cách A (Khuyên dùng trong DevOps): Dùng Git Clone trực tiếp từ GitHub</span>
-<span class="c-cmd">sudo git</span> <span class="c-cmd">clone</span> <span class="c-str">https://github.com/myusername/my-portfolio.git</span> <span class="c-path">/var/www/my-portfolio</span>
+<code><span class="c-cmt"># CÁCH 1: Nếu bạn đã có sẵn thư mục chứa file HTML (ví dụ tại ~/my-website/):</span>
+<span class="c-cmt"># Dùng lệnh cp -r để sao chép toàn bộ file vào thư mục web root:</span>
+<span class="c-cmd">sudo cp</span> <span class="c-flag">-r</span> <span class="c-path">~/my-website/*</span> <span class="c-path">/var/www/my-static-web/</span>
 
-<span class="c-cmt"># Cách B: Copy từ máy tính cá nhân lên VPS qua lệnh SCP (chạy trên máy cá nhân)</span>
-<span class="c-cmd">scp</span> <span class="c-flag">-r</span> <span class="c-path">./dist/*</span> <span class="c-str">root@123.45.67.89:/var/www/my-portfolio/</span>
+<span class="c-cmt"># CÁCH 2: Nếu chưa có, tạo trực tiếp file index.html mẫu có sẵn bằng lệnh Linux:</span>
+<span class="c-cmd">sudo bash</span> <span class="c-flag">-c</span> <span class="c-str">'cat &lt;&lt; "EOF" &gt; /var/www/my-static-web/index.html
+&lt;!DOCTYPE html&gt;
+&lt;html lang="vi"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Ứng Dụng Web HTML PTIT DevOps&lt;/title&gt;
+    &lt;style&gt;
+        body { font-family: sans-serif; text-align: center; padding: 50px; background: #f8fafc; }
+        h1 { color: #2563eb; }
+        p { color: #475569; font-size: 1.1rem; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;🚀 Triển Khai HTML Lên Nginx Thành Công!&lt;/h1&gt;
+    &lt;p&gt;File HTML có sẵn trên máy VPS đã được Nginx phục vụ hoàn hảo.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+EOF'</span>
 
-<span class="c-cmt"># Cách C: Tạo nhanh file index.html mẫu để test</span>
-<span class="c-cmd">sudo bash</span> <span class="c-flag">-c</span> <span class="c-str">'echo "&lt;h1&gt;Deploy PTIT DevOps Thành Công!&lt;/h1&gt;" &gt; /var/www/my-portfolio/index.html'</span></code>
+<span class="c-cmt"># Kiểm tra lại xem file đã có mặt trong thư mục chưa:</span>
+<span class="c-cmd">ls</span> <span class="c-flag">-la</span> <span class="c-path">/var/www/my-static-web</span></code>
                 </div>
               </div>
             </div>
@@ -1428,13 +1651,15 @@ Loại tệp  Owner (Chủ)    Group (Nhóm)   Others (Người khác)
             <!-- Step 4 -->
             <div class="timeline-item">
               <div class="timeline-dot"></div>
-              <h4 class="timeline-title">Bước 4: Phân quyền sở hữu tệp cho Nginx</h4>
-              <p class="timeline-desc">Đảm bảo người dùng dịch vụ <code>www-data</code> có toàn quyền đọc mã nguồn để tránh lỗi 403 Forbidden.</p>
+              <h4 class="timeline-title">Bước 4: Phân quyền sở hữu tệp cho Nginx (www-data)</h4>
+              <p class="timeline-desc">
+                Đây là bước quan trọng nhất để tránh lỗi <strong>403 Forbidden</strong>. Cần cấp quyền sở hữu thư mục cho người dùng hệ thống <code>www-data</code>:
+              </p>
               <div class="code-box">
                 <div class="code-header"><span class="code-title">Bash</span><button class="btn-copy">Sao chép</button></div>
                 <div class="code-body">
-<code><span class="c-cmd">sudo chown</span> <span class="c-flag">-R</span> <span class="c-str">www-data:www-data</span> <span class="c-path">/var/www/my-portfolio</span>
-<span class="c-cmd">sudo chmod</span> <span class="c-flag">-R</span> <span class="c-num">755</span> <span class="c-path">/var/www/my-portfolio</span></code>
+<code><span class="c-cmd">sudo chown</span> <span class="c-flag">-R</span> <span class="c-str">www-data:www-data</span> <span class="c-path">/var/www/my-static-web</span>
+<span class="c-cmd">sudo chmod</span> <span class="c-flag">-R</span> <span class="c-num">755</span> <span class="c-path">/var/www/my-static-web</span></code>
                 </div>
               </div>
             </div>
@@ -1442,26 +1667,42 @@ Loại tệp  Owner (Chủ)    Group (Nhóm)   Others (Người khác)
             <!-- Step 5 -->
             <div class="timeline-item">
               <div class="timeline-dot"></div>
-              <h4 class="timeline-title">Bước 5: Tạo file cấu hình Virtual Host mới</h4>
-              <p class="timeline-desc">Tạo file cấu hình tại <code>sites-available</code>.</p>
+              <h4 class="timeline-title">Bước 5: Tạo file cấu hình Virtual Host Nginx mới</h4>
+              <p class="timeline-desc">Tạo file cấu hình tại thư mục <code>sites-available</code>:</p>
               <div class="code-box">
                 <div class="code-header"><span class="code-title">Bash</span><button class="btn-copy">Sao chép</button></div>
                 <div class="code-body">
-<code><span class="c-cmd">sudo nano</span> <span class="c-path">/etc/nginx/sites-available/my-portfolio.conf</span></code>
+<code><span class="c-cmd">sudo nano</span> <span class="c-path">/etc/nginx/sites-available/my-static-web.conf</span></code>
                 </div>
               </div>
-              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.35rem;">Dán nội dung cấu hình <code>server { listen 80; ... }</code> như mục 3.4 rồi lưu lại (Ctrl+O, Enter, Ctrl+X).</p>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.35rem;">Dán nội dung cấu hình Virtual Host trỏ đúng đường dẫn <code>root /var/www/my-static-web;</code>:</p>
+              <div class="code-box">
+                <div class="code-header"><span class="code-title">Nginx Virtual Host Config</span><button class="btn-copy">Sao chép</button></div>
+                <div class="code-body">
+<code><span class="c-kw">server</span> {
+    <span class="c-cmd">listen</span> <span class="c-num">80</span>;
+    <span class="c-cmd">server_name</span> <span class="c-str">_</span>; <span class="c-cmt"># Dấu _ chấp nhận mọi tên miền hoặc IP của VPS</span>
+
+    <span class="c-cmd">root</span> <span class="c-path">/var/www/my-static-web</span>;
+    <span class="c-cmd">index</span> <span class="c-str">index.html index.htm</span>;
+
+    <span class="c-kw">location</span> / {
+        <span class="c-cmd">try_files</span> <span class="c-str">$uri $uri/ =404</span>;
+    }
+}</code>
+                </div>
+              </div>
             </div>
 
             <!-- Step 6 -->
             <div class="timeline-item">
               <div class="timeline-dot"></div>
-              <h4 class="timeline-title">Bước 6: Kích hoạt Virtual Host bằng Symbolic Link</h4>
-              <p class="timeline-desc">Tạo liên kết tượng trưng sang <code>sites-enabled</code>.</p>
+              <h4 class="timeline-title">Bước 6: Kích hoạt Virtual Host bằng liên kết mềm (Symbolic Link)</h4>
+              <p class="timeline-desc">Tạo symlink từ <code>sites-available</code> sang <code>sites-enabled</code>:</p>
               <div class="code-box">
                 <div class="code-header"><span class="code-title">Bash</span><button class="btn-copy">Sao chép</button></div>
                 <div class="code-body">
-<code><span class="c-cmd">sudo ln</span> <span class="c-flag">-s</span> <span class="c-path">/etc/nginx/sites-available/my-portfolio.conf</span> <span class="c-path">/etc/nginx/sites-enabled/</span></code>
+<code><span class="c-cmd">sudo ln</span> <span class="c-flag">-s</span> <span class="c-path">/etc/nginx/sites-available/my-static-web.conf</span> <span class="c-path">/etc/nginx/sites-enabled/</span></code>
                 </div>
               </div>
             </div>
@@ -1469,36 +1710,23 @@ Loại tệp  Owner (Chủ)    Group (Nhóm)   Others (Người khác)
             <!-- Step 7 -->
             <div class="timeline-item">
               <div class="timeline-dot"></div>
-              <h4 class="timeline-title">Bước 7: Kiểm tra cú pháp và Reload Nginx</h4>
-              <p class="timeline-desc">Kiểm tra an toàn trước khi nạp thay đổi.</p>
+              <h4 class="timeline-title">Bước 7: Kiểm tra cú pháp an toàn và Reload Nginx</h4>
+              <p class="timeline-desc">Kiểm tra tính hợp lệ của cú pháp cấu hình trước khi nạp lại dịch vụ:</p>
               <div class="code-box">
                 <div class="code-header"><span class="code-title">Bash</span><button class="btn-copy">Sao chép</button></div>
                 <div class="code-body">
 <code><span class="c-cmd">sudo nginx</span> <span class="c-flag">-t</span>
+<span class="c-cmt"># Khi thấy output "syntax is ok" và "test is successful", tiến hành reload:</span>
 <span class="c-cmd">sudo systemctl</span> <span class="c-cmd">reload</span> <span class="c-str">nginx</span></code>
                 </div>
               </div>
             </div>
 
             <!-- Step 8 -->
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <h4 class="timeline-title">Bước 8: Mở cổng Tường Lửa (UFW Firewall)</h4>
-              <p class="timeline-desc">Cho phép truy cập giao thức HTTP (cổng 80) và HTTPS (cổng 443).</p>
-              <div class="code-box">
-                <div class="code-header"><span class="code-title">Bash</span><button class="btn-copy">Sao chép</button></div>
-                <div class="code-body">
-<code><span class="c-cmd">sudo ufw</span> <span class="c-cmd">allow</span> <span class="c-str">'Nginx Full'</span>
-<span class="c-cmd">sudo ufw</span> <span class="c-cmd">status</span></code>
-                </div>
-              </div>
-            </div>
-
-            <!-- Step 9 -->
             <div class="timeline-item success">
               <div class="timeline-dot"></div>
-              <h4 class="timeline-title">Bước 9: Kiểm tra truy cập trên trình duyệt</h4>
-              <p class="timeline-desc">Mở trình duyệt gõ: <code>http://your_vps_ip</code> hoặc <code>http://demo-devops.com</code> để chiêm ngưỡng thành quả!</p>
+              <h4 class="timeline-title">Bước 8: Kiểm tra thành quả truy cập trên trình duyệt</h4>
+              <p class="timeline-desc">Mở trình duyệt trên máy tính cá nhân gõ địa chỉ IP VPS của bạn: <code>http://&lt;IP_VPS&gt;</code> (ví dụ: <code>http://103.142.25.10</code>). Bạn sẽ thấy nội dung file HTML có sẵn trên VPS được hiển thị hoàn chỉnh!</p>
             </div>
           </div>
         </article>
@@ -1568,15 +1796,246 @@ Loại tệp  Owner (Chủ)    Group (Nhóm)   Others (Người khác)
       </section>
 
       <!-- ==============================================================
-           PHẦN 4: CÔNG CỤ TƯƠNG TÁC & TRẮC NGHIỆM ÔN THI
+           PHẦN 4: TƯỜNG LỬA UFW (FIREWALL) TRÊN LINUX VPS
            ============================================================== -->
-      <section class="topic-section tools" id="phan-4-congcu">
+      <section class="topic-section ufw" id="phan-4-ufw">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-badge ufw">🛡️</div>
+            <div>
+              <h2 class="section-title">Phần 4: Tường Lửa UFW (Uncomplicated Firewall) Trên Linux VPS</h2>
+              <p class="section-subtitle">Lá chắn an ninh mạng bảo vệ máy chủ, kiểm soát lưu lượng và mở cổng an toàn cho Nginx</p>
+            </div>
+          </div>
+          <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; cursor: pointer;">
+            <input type="checkbox" class="topic-check" data-topic="ufw-p4"> Đã học xong phần 4
+          </label>
+        </div>
+
+        <!-- 4.1 Khái niệm & Nguyên lý -->
+        <article class="content-card" id="ufw-khainiem">
+          <div class="card-header-flex">
+            <h3 class="card-title">
+              <span class="icon-mini">🌐</span> 4.1 Khái Niệm & Vai Trò Của Tường Lửa UFW Trong DevOps
+            </h3>
+            <label class="check-badge">
+              <input type="checkbox" data-topic="ufw-khainiem"> Đã hiểu
+            </label>
+          </div>
+
+          <p>
+            <strong>UFW (Uncomplicated Firewall)</strong> là công cụ quản lý tường lửa mặc định và phổ biến nhất trên các máy chủ Ubuntu/Debian. Bản chất UFW là một giao diện dòng lệnh thân thiện được xây dựng phía trên <code>iptables</code> phức tạp của nhân hệ điều hành Linux (Linux Kernel Netfilter).
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin: 1.25rem 0;">
+            <div style="background: var(--bg-input); border-left: 4px solid var(--accent-cyan); padding: 1rem; border-radius: var(--radius-sm);">
+              <strong>Nguyên tắc mặc định an toàn của UFW:</strong>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.35rem;">
+                • <strong>Deny incoming:</strong> Tự động chặn TẤT CẢ các kết nối từ bên ngoài Internet đi VÀO máy chủ.<br>
+                • <strong>Allow outgoing:</strong> Cho phép máy chủ gửi kết nối ĐI RA ngoài bình thường (để cập nhật gói apt, tải mã nguồn).
+              </p>
+            </div>
+            <div style="background: var(--bg-input); border-left: 4px solid var(--accent-green); padding: 1rem; border-radius: var(--radius-sm);">
+              <strong>Vì sao DevOps bắt buộc phải cấu hình UFW:</strong>
+              <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.35rem;">
+                Ngăn chặn hacker quét cổng (Port Scanning), chống tấn công từ chối dịch vụ (DDoS), bảo vệ các dịch vụ nhạy cảm như MySQL (3306), Redis (6379), MongoDB (27017) không bị truy cập trái phép.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4.2 Lệnh trạng thái & Bật tắt -->
+        <article class="content-card" id="ufw-trangthai">
+          <div class="card-header-flex">
+            <h3 class="card-title">
+              <span class="icon-mini">⚡</span> 4.2 Lệnh Kiểm Tra Trạng Thái & Bật/Tắt Tường Lửa
+            </h3>
+            <label class="check-badge">
+              <input type="checkbox" data-topic="ufw-trangthai"> Đã hiểu
+            </label>
+          </div>
+
+          <div class="code-box">
+            <div class="code-header">
+              <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>
+              <span class="code-title">Terminal: Các lệnh trạng thái UFW</span>
+              <button class="btn-copy">Sao chép</button>
+            </div>
+            <div class="code-body">
+<code><span class="c-cmt"># 1. Kiểm tra trạng thái hiện tại của tường lửa (Status):</span>
+<span class="c-cmd">sudo ufw</span> <span class="c-cmd">status</span>
+<span class="c-cmt"># Kết quả có thể là: "Status: inactive" (đang tắt) hoặc "Status: active" (đang bật)</span>
+
+<span class="c-cmt"># 2. Xem chi tiết trạng thái kèm chính sách mặc định (Verbose):</span>
+<span class="c-cmd">sudo ufw</span> <span class="c-cmd">status verbose</span>
+
+<span class="c-cmt"># 3. Nạp lại cấu hình tường lửa sau khi chỉnh sửa rule:</span>
+<span class="c-cmd">sudo ufw</span> <span class="c-cmd">reload</span>
+
+<span class="c-cmt"># 4. Tạm thời tắt tường lửa khi cần debug kết nối mạng:</span>
+<span class="c-cmd">sudo ufw</span> <span class="c-cmd">disable</span></code>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4.3 Mở cổng SSH 22 - Quy tắc sống còn -->
+        <article class="content-card" id="ufw-ssh">
+          <div class="card-header-flex">
+            <h3 class="card-title">
+              <span class="icon-mini">🚨</span> 4.3 QUY TẮC SỐNG CÒN: Mở Cổng SSH (Port 22) Trước Khi Bật Tường Lửa
+            </h3>
+            <label class="check-badge">
+              <input type="checkbox" data-topic="ufw-ssh"> Đã hiểu
+            </label>
+          </div>
+
+          <div class="callout callout-danger">
+            <span class="callout-icon">⚠️</span>
+            <div>
+              <strong>CẢNH BÁO BỊ KHÓA NGOÀI MÁY CHỦ (LOCKED OUT OF VPS):</strong><br>
+              Khi bạn gõ <code>sudo ufw enable</code>, nếu bạn CHƯA mở cổng SSH (mặc định là cổng 22), tường lửa sẽ lập tức chặn toàn bộ kết nối SSH đang có! Bạn sẽ bị ngắt kết nối và <strong>KHÔNG THỂ SSH VÀO LẠI MÁY CHỦ ĐƯỢC NỮA</strong>, chỉ còn cách đăng nhập vào Console nhà cung cấp VPS để khôi phục!
+            </div>
+          </div>
+
+          <div class="code-box">
+            <div class="code-header">
+              <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>
+              <span class="code-title">Terminal: Trình tự kích hoạt UFW an toàn tuyệt đối</span>
+              <button class="btn-copy">Sao chép</button>
+            </div>
+            <div class="code-body">
+<code><span class="c-cmt"># BƯỚC 1: Luôn luôn mở cổng SSH TRƯỚC:</span>
+<span class="c-cmd">sudo ufw</span> <span class="c-cmd">allow</span> <span class="c-num">22</span>/<span class="c-str">tcp</span>
+<span class="c-cmt"># (Hoặc lệnh tương đương: sudo ufw allow ssh)</span>
+
+<span class="c-cmt"># BƯỚC 2: Sau khi đã mở port 22 thành công, mới tiến hành BẬT tường lửa:</span>
+<span class="c-cmd">sudo ufw</span> <span class="c-cmd">enable</span>
+<span class="c-cmt"># Nhấn 'y' khi terminal hỏi xác nhận: "Command may disrupt existing ssh connections. Proceed with operation (y|n)?"</span></code>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4.4 Mở cổng dịch vụ Web Nginx -->
+        <article class="content-card" id="ufw-webports">
+          <div class="card-header-flex">
+            <h3 class="card-title">
+              <span class="icon-mini">🔓</span> 4.4 Mở Cổng Dịch Vụ Web Cho Nginx (Port 80, 443 & App Profile)
+            </h3>
+            <label class="check-badge">
+              <input type="checkbox" data-topic="ufw-webports"> Đã hiểu
+            </label>
+          </div>
+
+          <p>
+            Để người dùng từ Internet có thể truy cập vào website Nginx của bạn, bạn cần mở cổng giao thức Web tương ứng:
+          </p>
+
+          <div class="code-box">
+            <div class="code-header">
+              <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>
+              <span class="code-title">Terminal: Mở cổng Nginx trên UFW</span>
+              <button class="btn-copy">Sao chép</button>
+            </div>
+            <div class="code-body">
+<code><span class="c-cmt"># CÁCH 1: Mở cổng theo số cổng và giao thức:</span>
+<span class="c-cmd">sudo ufw</span> <span class="c-cmd">allow</span> <span class="c-num">80</span>/<span class="c-str">tcp</span>   <span class="c-cmt"># Cho phép truy cập HTTP thông thường</span>
+<span class="c-cmd">sudo ufw</span> <span class="c-cmd">allow</span> <span class="c-num">443</span>/<span class="c-str">tcp</span>  <span class="c-cmt"># Cho phép truy cập bảo mật HTTPS</span>
+
+<span class="c-cmt"># CÁCH 2 (Khuyên dùng): Sử dụng Application Profile có sẵn của Nginx:</span>
+<span class="c-cmt"># Xem danh sách các ứng dụng được đăng ký với UFW:</span>
+<span class="c-cmd">sudo ufw</span> <span class="c-cmd">app list</span>
+<span class="c-cmt"># Sẽ thấy 3 profile của Nginx:</span>
+<span class="c-cmt"># • 'Nginx HTTP' : Chỉ mở cổng 80</span>
+<span class="c-cmt"># • 'Nginx HTTPS': Chỉ mở cổng 443</span>
+<span class="c-cmt"># • 'Nginx Full' : Mở CẢ HAI cổng 80 và 443 (Khuyên dùng nhất!)</span>
+
+<span class="c-cmd">sudo ufw</span> <span class="c-cmd">allow</span> <span class="c-str">'Nginx Full'</span></code>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4.5 Kiểm soát IP -->
+        <article class="content-card" id="ufw-ipfilter">
+          <div class="card-header-flex">
+            <h3 class="card-title">
+              <span class="icon-mini">🎯</span> 4.5 Kiểm Soát Truy Cập Theo Địa Chỉ IP (Allow / Deny IP)
+            </h3>
+            <label class="check-badge">
+              <input type="checkbox" data-topic="ufw-ipfilter"> Đã hiểu
+            </label>
+          </div>
+
+          <div class="code-box">
+            <div class="code-header">
+              <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>
+              <span class="code-title">Terminal: Lệnh phân quyền IP trên UFW</span>
+              <button class="btn-copy">Sao chép</button>
+            </div>
+            <div class="code-body">
+<code><span class="c-cmt"># 1. Chặn đứng một địa chỉ IP có hành vi tấn công, spam (Blacklist):</span>
+<span class="c-cmd">sudo ufw</span> <span class="c-cmd">deny from</span> <span class="c-str">192.168.1.150</span>
+
+<span class="c-cmt"># 2. Chặn cả một dải mạng IP (Subnet):</span>
+<span class="c-cmd">sudo ufw</span> <span class="c-cmd">deny from</span> <span class="c-str">192.168.1.0/24</span>
+
+<span class="c-cmt"># 3. Chỉ cho phép DUY NHẤT địa chỉ IP của bạn được phép SSH vào cổng 22 (Bảo mật tối đa):</span>
+<span class="c-cmd">sudo ufw</span> <span class="c-cmd">allow from</span> <span class="c-str">14.161.20.55</span> <span class="c-cmd">to any port</span> <span class="c-num">22</span> <span class="c-str">proto tcp</span>
+
+<span class="c-cmt"># 4. Cho phép một server nội bộ truy cập cổng Database MySQL (3306):</span>
+<span class="c-cmd">sudo ufw</span> <span class="c-cmd">allow from</span> <span class="c-str">10.0.0.5</span> <span class="c-cmd">to any port</span> <span class="c-num">3306</span></code>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4.6 Quản lý & Xóa quy tắc -->
+        <article class="content-card" id="ufw-rules">
+          <div class="card-header-flex">
+            <h3 class="card-title">
+              <span class="icon-mini">🗑️</span> 4.6 Quản Lý, Xem Danh Sách Đánh Số & Xóa Quy Tắc (Numbered Rules)
+            </h3>
+            <label class="check-badge">
+              <input type="checkbox" data-topic="ufw-rules"> Đã hiểu
+            </label>
+          </div>
+
+          <p>Khi muốn xóa một quy tắc đã thêm sai, cách an toàn và chuẩn xác nhất là dùng số thứ tự:</p>
+
+          <div class="code-box">
+            <div class="code-header">
+              <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>
+              <span class="code-title">Terminal: Quản lý và xóa rule UFW</span>
+              <button class="btn-copy">Sao chép</button>
+            </div>
+            <div class="code-body">
+<code><span class="c-cmt"># BƯỚC 1: Hiển thị danh sách quy tắc kèm SỐ THỨ TỰ:</span>
+<span class="c-cmd">sudo ufw</span> <span class="c-cmd">status numbered</span>
+<span class="c-cmt"># Kết quả mẫu:</span>
+<span class="c-cmt">#      To                         Action      From</span>
+<span class="c-cmt">#      --                         ------      ----</span>
+<span class="c-cmt"># [ 1] 22/tcp                     ALLOW IN    Anywhere</span>
+<span class="c-cmt"># [ 2] Nginx Full                 ALLOW IN    Anywhere</span>
+<span class="c-cmt"># [ 3] 8080/tcp                   ALLOW IN    Anywhere</span>
+
+<span class="c-cmt"># BƯỚC 2: Xóa quy tắc theo đúng số thứ tự trong ngoặc vuông (Ví dụ xóa rule số 3):</span>
+<span class="c-cmd">sudo ufw</span> <span class="c-cmd">delete</span> <span class="c-num">3</span>
+
+<span class="c-cmt"># BƯỚC 3: Nếu muốn RESET toàn bộ tường lửa về cài đặt ban đầu của nhà sản xuất:</span>
+<span class="c-cmd">sudo ufw</span> <span class="c-cmd">reset</span></code>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ==============================================================
+           PHẦN 5: CÔNG CỤ TƯƠNG TÁC & TRẮC NGHIỆM ÔN THI
+           ============================================================== -->
+      <section class="topic-section tools" id="phan-5-congcu">
         <div class="section-header">
           <div class="section-title-wrap">
             <div class="section-badge tools" style="background: var(--gradient-hero); color: #fff;">🧮</div>
             <div>
-              <h2 class="section-title">Phần 4: Công Cụ Trực Quan & Trắc Nghiệm Thực Chiến</h2>
-              <p class="section-subtitle">Thực hành tính toán quyền Linux và làm bài test đánh giá kiến thức ngay trên trang</p>
+              <h2 class="section-title">Phần 5: Công Cụ Trực Quan & Trắc Nghiệm Thực Chiến</h2>
+              <p class="section-subtitle">Thực hành tính toán quyền Linux, giả lập Terminal và làm bài test đánh giá kiến thức ngay trên trang</p>
             </div>
           </div>
         </div>
@@ -1702,8 +2161,10 @@ Loại tệp  Owner (Chủ)    Group (Nhóm)   Others (Người khác)
               <button class="terminal-chip" data-cmd="ls -lah">ls -lah</button>
               <button class="terminal-chip" data-cmd="nginx -t">nginx -t</button>
               <button class="terminal-chip" data-cmd="systemctl status nginx">systemctl status nginx</button>
+              <button class="terminal-chip" data-cmd="ufw status">ufw status</button>
               <button class="terminal-chip" data-cmd="git status">git status</button>
               <button class="terminal-chip" data-cmd="git flow init">git flow init</button>
+              <button class="terminal-chip" data-cmd="git merge --abort">git merge --abort</button>
               <button class="terminal-chip" data-cmd="chmod 755 index.html">chmod 755 index.html</button>
               <button class="terminal-chip" data-cmd="df -h">df -h</button>
               <button class="terminal-chip" data-cmd="clear">clear</button>

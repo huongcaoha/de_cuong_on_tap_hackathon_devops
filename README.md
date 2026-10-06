@@ -4,7 +4,7 @@
 
 ---
 
-## 🎯 3 Chủ Đề Cốt Lõi Trong Đề Cương
+## 🎯 4 Chủ Đề Cốt Lõi Trong Đề Cương
 
 ### 1. 🐧 Các Câu Lệnh Thao Tác Với Tệp Tin Trong Linux VPS
 - **Bản chất cây thư mục Linux**: Phân biệt thư mục gốc `/`, `/etc` (cấu hình), `/var/www` (mã nguồn web), `/var/log` (nhật ký hệ thống), `/tmp`, `/home`, `/root`.
@@ -19,7 +19,7 @@
   - Lệnh `chmod` và `chown -R www-data:www-data`.
 - **Nén & Dung lượng**: `tar -czvf`, `tar -xzvf`, `df -h`, `du -sh *`, liên kết mềm Symbolic Link `ln -s`.
 
-### 2. 🌿 Các Câu Lệnh Thao Tác Với Git Flow
+### 2. 🌿 Các Câu Lệnh Thao Tác Với Git Flow & Xử Lý Merge Conflict
 - **Bản chất mô hình phân nhánh Git Flow** của Vincent Driessen.
 - **2 Nhánh vĩnh viễn**: `main` (Production, gắn Tag phiên bản) và `develop` (Tích hợp trung tâm).
 - **3 Nhánh hỗ trợ tạm thời**:
@@ -28,14 +28,37 @@
   - `hotfix/*`: Vá lỗi khẩn cấp trực tiếp từ `main` -> fix -> merge cả `main` & `develop` -> gắn Tag.
 - **Quy trình lệnh chi tiết**: Thực hiện bằng cả **Git thuần túy (Pure Git)** và công cụ mở rộng `git flow`.
 - **Quy tắc vàng**: Vì sao bắt buộc dùng cờ `--no-ff` (No Fast-Forward), tại sao Hotfix phải merge về cả 2 nhánh.
+- **Xử lý Xung Đột (Merge Conflict) Thực Chiến**:
+  - Bản chất khi hai người cùng sửa một dòng code hoặc sửa song song trên 2 nhánh.
+  - Giải mã đánh dấu conflict: `<<<<<<< HEAD`, `=======`, `>>>>>>>`.
+  - Quy trình 5 bước xử lý: Phát hiện -> Mở file gỡ mâu thuẫn -> Xóa thẻ đánh dấu -> `git add` & `git commit` -> Hoàn tất.
+  - Lệnh khẩn cấp an toàn: `git merge --abort` khôi phục trạng thái an toàn trước khi merge.
 
-### 3. ⚡ Nginx Và Deploy Ứng Dụng Nginx Với HTML
+### 3. ⚡ Nginx Và Deploy File HTML Có Sẵn Trên Máy VPS Từ A Đến Z
 - **Nginx là gì?**: Web Server hiệu năng cao, Reverse Proxy, Load Balancer. Kiến trúc Event-driven bất đồng bộ giải quyết bài toán C10K connection.
 - **Quản lý dịch vụ qua systemd**: `systemctl status / start / stop / restart / reload` (Zero Downtime) và `nginx -t` (kiểm tra cú pháp).
 - **Cấu trúc thư mục Nginx**: `/etc/nginx/nginx.conf`, `/etc/nginx/sites-available/`, `/etc/nginx/sites-enabled/`, `/var/log/nginx/`.
 - **File cấu hình Virtual Host chuẩn**: Phân tích chi tiết `listen 80;`, `server_name;`, `root;`, `index;`, `try_files $uri $uri/ =404;`, Cache headers, custom error page.
-- **Quy trình 9 Bước Deploy HTML từ A-Z**: Chuẩn bị VPS -> Cài Nginx -> Đưa code lên (`git clone`/`scp`) -> Phân quyền `www-data` -> Tạo file cấu hình -> Tạo Symlink -> `nginx -t` & `systemctl reload nginx` -> Mở Firewall UFW -> Kiểm tra trình duyệt.
+- **8 Bước Deploy File HTML Có Sẵn Trên VPS**:
+  - Bước 1: Chuẩn bị VPS & Cài Nginx (`apt update && apt install -y nginx`).
+  - Bước 2: Tạo thư mục web gốc (`/var/www/my-static-web`).
+  - Bước 3: Đưa file HTML có sẵn trên máy VPS vào thư mục web (sử dụng lệnh `cp -r` từ thư mục có sẵn hoặc tạo trực tiếp bằng `cat << 'EOF' > ... / nano`).
+  - Bước 4: Phân quyền tệp tin và sở hữu cho `www-data` (`chown -R www-data:www-data`, `chmod 755`, `chmod 644`).
+  - Bước 5: Viết file cấu hình Server Block (`/etc/nginx/sites-available/my-static-web.conf`).
+  - Bước 6: Kích hoạt Server Block bằng Symbolic Link (`ln -s ... /etc/nginx/sites-enabled/`).
+  - Bước 7: Kiểm tra cú pháp (`nginx -t`) & Tải lại Nginx (`systemctl reload nginx`).
+  - Bước 8: Kiểm tra hoạt động trực tiếp qua trình duyệt & `curl -I http://localhost`.
 - **Bảng tra cứu khắc phục lỗi (Troubleshooting)**: Sửa triệt để lỗi `403 Forbidden`, `404 Not Found`, `502 Bad Gateway`.
+
+### 4. 🛡️ Quản Trị Tường Lửa UFW (Firewall) Trên Linux VPS
+- **Bản chất UFW (Uncomplicated Firewall)**: Giao diện trực quan cấu hình iptables của nhân Linux.
+- **Nguyên tắc vàng sống còn**: Mở port SSH (22) TRƯỚC KHI bật UFW (`ufw allow 22/tcp`), tuyệt đối không bật trước để tránh bị khóa ngoài VPS!
+- **Kiểm tra trạng thái & Bật/Tắt**: `ufw status verbose`, `ufw enable`, `ufw disable`, `ufw reload`.
+- **Mở cổng cho dịch vụ Web**: `ufw allow 80/tcp` (HTTP), `ufw allow 443/tcp` (HTTPS) hoặc `ufw allow "Nginx Full"`.
+- **Quy tắc bảo mật nâng cao**:
+  - Giới hạn IP cụ thể truy cập SSH: `ufw allow from <IP_ADDRESS> to any port 22 proto tcp`.
+  - Chặn một IP phá hoại / tấn công: `ufw deny from <ATTACKER_IP>`.
+- **Quản lý danh sách luật có số thứ tự**: `ufw status numbered` và xóa luật chuẩn xác theo số thứ tự `ufw delete <NUMBER>`.
 
 ---
 
